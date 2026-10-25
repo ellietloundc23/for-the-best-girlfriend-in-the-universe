@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para la mejor novia del universo ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 650px;
+            width: 100%;
+            z-index: 10;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            color: #ff758c;
+            text-shadow: 0 0 10px rgba(255, 117, 140, 0.5);
+        }
+
+        p.subtitle {
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            color: #ddd;
+        }
+
+        .timer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff758c;
+        }
+
+        .time-box label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aaa;
+        }
+
+        /* SECCIÓN RNG / GACHA */
+        .rng-section {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px dashed rgba(255, 117, 140, 0.4);
+            margin-top: 20px;
+        }
+
+        .rng-title {
+            font-size: 1.4rem;
+            color: #ffb199;
+            margin-bottom: 10px;
+        }
+
+        .counter-tracker {
+            font-size: 0.9rem;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .spin-btn {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .spin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
+        }
+
+        .spin-btn:active {
+            transform: scale(0.95);
+        }
+
+        .reward-card {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid transparent;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .rarity-tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .reward-text {
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        /* Colores de Raresas */
+        .common { border-color: #a0a0a0; }
+        .common .rarity-tag { background: #666; color: #fff; }
+
+        .rare { border-color: #4facfe; box-shadow: 0 0 10px rgba(79, 172, 254, 0.3); }
+        .rare .rarity-tag { background: #00f2fe; color: #000; }
+
+        .epic { border-color: #b224ef; box-shadow: 0 0 15px rgba(178, 36, 239, 0.4); }
+        .epic .rarity-tag { background: #b224ef; color: #fff; }
+
+        .legendary { border-color: #f9d423; box-shadow: 0 0 20px rgba(249, 212, 35, 0.6); animation: pulse 1.5s infinite alternate; }
+        .legendary .rarity-tag { background: #f9d423; color: #000; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 20px;
+            color: #ff758c;
+            animation: float 6s linear infinite;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .timer { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Para la mejor novia del universo ✨</h1>
+        <p class="subtitle">Llevamos juntos y sumando momentos:</p>
+
+        <div class="timer">
+            <div class="time-box"><span id="days">0</span><label>Días</label></div>
+            <div class="time-box"><span id="hours">0</span><label>Horas</label></div>
+            <div class="time-box"><span id="minutes">0</span><label>Minutos</label></div>
+            <div class="time-box"><span id="seconds">0</span><label>Segundos</label></div>
+        </div>
+
+        <!-- SECCIÓN DE RNG -->
+        <div class="rng-section">
+            <div class="rng-title">🎰 Gacha de Recuerdos & Premios</div>
+            <div class="counter-tracker">Colección descubierta: <b id="unlocked-count">0</b> / <b id="total-count">0</b></div>
+            
+            <button class="spin-btn" onclick="spinRNG()">✨ TIRAR RNG (Abrir regalo) ✨</button>
+
+            <div id="reward-box" class="reward-card common" style="display: none;">
+                <div id="rarity" class="rarity-tag">Común</div>
+                <div id="reward-text" class="reward-text">¡Haz clic arriba para lanzar tu primer tiro!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // FECHA DE INICIO DE LA RELACIÓN
+        const startDate = new Date(2026, 8, 25, 0, 0, 0);
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('minutes').innerText = Math.floor((diff / (1000 * 60)) % 60);
+            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // BASE DE DATOS DEL RNG (32 ÍTEMS)
+        const lootTable = {
+            common: [
+                "Recuerdo: La primera vez que nos quedamos hablando hasta tarde.",
+                "Dato: Me encanta la forma en la que te ríes sin darte cuenta.",
+                "Recuerdo: La primera foto que me enviaste.",
+                "Mini-Detalle: Cada vez que veo una notificación tuya, me cambia el ánimo.",
+                "Fact: Eres la persona más linda de todo mi feed de la vida.",
+                "Dato: Tienes los ojos y la sonrisa más bonita que he visto.",
+                "Recuerdo: La primera canción que me hizo pensar en ti.",
+                "Mini-Detalle: Me sé de memoria las cosas que te hacen sonreír.",
+                "Fact: Si pudiera elegir con quién hablar todos los días, te elegiría mil veces a ti.",
+                "Recuerdo: Ese mensaje tuyo que guardé en favoritos."
+            ],
+            rare: [
+                "🎟️ CUPÓN: Válido por una salida a comer lo que tú quieras.",
+                "🎟️ CUPÓN: Válido por un masaje relajante cuando estés estresada.",
+                "🎟️ CUPÓN: Tú eliges la película o serie la próxima vez.",
+                "🎟️ CUPÓN: Válido por un día entero donde yo hago lo que me pidas.",
+                "🎟️ CUPÓN: Un abrazo gigante de más de 1 minuto sin soltarte.",
+                "🎟️ CUPÓN: Válido por tu postre/dulce favorito pagado por mí.",
+                "🎟️ CUPÓN: Noche de llamadas/juegos hasta la hora que quieras.",
+                "🎟️ CUPÓN: Tienes derecho a ganarme cualquier discusión hoy."
+            ],
+            epic: [
+                "💌 Carta Corta: Gracias por llegar a mi vida y hacer que todo sea más bonito.",
+                "💌 Carta Corta: No importa qué tan difícil sea el día, hablar contigo lo arregla.",
+                "💌 Carta Corta: Admiro muchísimo lo fuerte y dedicada que eres.",
+                "💌 Carta Corta: Me encanta la química que tenemos, se siente tan natural.",
+                "💌 Carta Corta: Eres mi lugar seguro y mi persona favorita.",
+                "💌 Carta Corta: Contigo aprendí lo que es querer a alguien bonito y de verdad."
+            ],
+            legendary: [
+                "👑 PROMESA LEGENDARIA: Prometo estar siempre a tu lado apoyándote en cada meta.",
+                "👑 SECRETO LEGENDARIO: Desde el primer momento supe que ibas a ser alguien muy especial para mí.",
+                "👑 PROMESA LEGENDARIA: Vamos a viajar y conocer lugares increíbles juntos.",
+                "👑 RECOMPENSA LEGENDARIA: ¡Ganaste el premio gordo! Reclámame un regalo sorpresa en persona. ❤️"
+            ]
+        };
+
+        let unlockedItems = new Set();
+        const totalItemsCount = lootTable.common.length + lootTable.rare.length + lootTable.epic.length + lootTable.legendary.length;
+        document.getElementById('total-count').innerText = totalItemsCount;
+
+        function spinRNG() {
+            const rewardBox = document.getElementById('reward-box');
+            const rarityTag = document.getElementById('rarity');
+            const rewardText = document.getElementById('reward-text');
+
+            rewardBox.style.display = 'flex';
+            rewardBox.className = 'reward-card'; // reset classes
+
+            const rand = Math.random() * 100;
+            let rarity = 'common';
+            let item = '';
+
+            if (rand < 5) {
+                // 5% Legendario
+                rarity = 'legend
