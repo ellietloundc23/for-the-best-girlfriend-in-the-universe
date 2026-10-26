@@ -5,38 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para la mejor novia del universo ✨</title>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
                         handwritten: ['Caveat', 'cursive'],
                     },
                     colors: {
-                        darkDeep: '#0b081e',
-                        darkPurple: '#1d173d',
+                        deepSpace: '#070510',
+                        cosmicCard: '#130e28',
                         neonPink: '#ff2a85',
-                        neonPurple: '#a855f7',
-                        goldGlow: '#f59e0b',
+                        roseAccent: '#ff758c',
+                        purpleGlow: '#a855f7',
+                        goldWarm: '#ffd166',
+                        cyanNeon: '#38bdf8'
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float-gentle': 'float 4s ease-in-out infinite',
+                        'float': 'float 5s ease-in-out infinite',
+                        'glow': 'glow 2.5s ease-in-out infinite alternate',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-8px)' }
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { filter: 'drop-shadow(0 0 5px rgba(255, 42, 133, 0.4))' },
+                            '100%': { filter: 'drop-shadow(0 0 20px rgba(255, 42, 133, 0.9))' },
                         }
                     }
                 }
@@ -45,281 +55,286 @@
     </script>
 
     <style>
-        /* Base Background Aesthetic */
+        /* CSS BASE & COSMIC THEMING */
         body {
-            background: linear-gradient(135deg, #090617 0%, #171033 50%, #0d122b 100%);
+            background: radial-gradient(circle at 50% -20%, #20123a 0%, #080512 70%, #030207 100%);
             background-attachment: fixed;
-            color: #f1f5f9;
-            font-family: 'Poppins', sans-serif;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* Glassmorphism Classes */
+        /* CUSTOM SCROLLBARS */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #080512; }
+        ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.4); border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 42, 133, 0.8); }
+
+        /* GLASSMORPHISM PANELS */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(19, 14, 40, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         .glass-card {
-            background: rgba(30, 20, 60, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(25, 18, 52, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .glass-card:hover {
-            border-color: rgba(255, 42, 133, 0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px -10px rgba(255, 42, 133, 0.3);
+            border-color: rgba(255, 117, 140, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px -10px rgba(255, 42, 133, 0.35);
         }
 
-        /* Nav Active Tab Highlight */
+        /* NAVIGATION TABS ACTIVE STYLE */
         .nav-tab-active {
-            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%) !important;
+            background: linear-gradient(135deg, #ff2a85 0%, #a855f7 100%) !important;
             color: #ffffff !important;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4) !important;
-            border-color: rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 0 25px rgba(255, 42, 133, 0.5) !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
         }
 
-        /* Floating Stars Particle Animation */
-        .star-particle {
+        /* FLOATING PARTICLES */
+        .particle-heart {
             position: fixed;
             pointer-events: none;
             z-index: 0;
+            animation: floatUp 10s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        /* WAX SEAL ENVELOPE EFFECT */
+        .wax-seal {
+            background: radial-gradient(circle at 30% 30%, #ff5277, #990022);
+            box-shadow: 0 4px 15px rgba(255, 42, 133, 0.5), inset 0 -2px 5px rgba(0,0,0,0.4);
+        }
+
+        /* STAMP TICKET COUPON DASHD BORDER */
+        .ticket-cut-left, .ticket-cut-right {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: #070510;
             border-radius: 50%;
-            animation: floatParticle 8s linear infinite;
+            transform: translateY(-50%);
         }
+        .ticket-cut-left { left: -10px; }
+        .ticket-cut-right { right: -10px; }
 
-        @keyframes floatParticle {
-            0% { transform: translateY(105vh) scale(0.3); opacity: 0; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        /* MODAL ANIMATION */
+        .modal-enter {
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
-        /* Envelope Open Effect */
-        .envelope-card {
-            perspective: 1000px;
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.92) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
-
-        /* Custom Scrollbars */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #090617; }
-        ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff2a85; }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="relative pb-16 selection:bg-pink-500 selection:text-white">
+<body class="relative pb-20 selection:bg-pink-500 selection:text-white">
 
-    <!-- Ambient Floating Particles Background -->
-    <div id="particle-bg" class="fixed inset-0 pointer-events-none z-0"></div>
+    <!-- FLOATING AMBIENT PARTICLES CONTAINER -->
+    <div id="particle-container" class="fixed inset-0 pointer-events-none z-0"></div>
 
-    <!-- MAIN HEADER WITH REAL-TIME TIMER -->
-    <header class="relative z-10 pt-8 pb-4 px-4 text-center max-w-5xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-pink-500/30 text-pink-300 text-xs font-semibold tracking-wider uppercase mb-3 animate-float-gentle">
-            <i class="fa-solid fa-sparkles text-amber-400"></i>
-            <span>Nuestra Historia de Amor</span>
-            <i class="fa-solid fa-heart text-rose-500"></i>
+    <!-- MAIN HEADER / HERO SECTION -->
+    <header class="relative z-10 pt-10 pb-6 px-4 text-center max-w-5xl mx-auto">
+        
+        <!-- TOP BADGE -->
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel border border-pink-500/40 text-rose-300 text-xs font-bold tracking-widest uppercase mb-4 animate-float">
+            <i class="fa-solid fa-sparkles text-amber-300"></i>
+            <span>Para la persona que ilumina mi universo</span>
+            <i class="fa-solid fa-heart text-pink-500"></i>
         </div>
 
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200 tracking-tight font-serif mb-3">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-purple-300 tracking-tight font-serif mb-3 leading-tight">
             Para la mejor novia del universo ✨
         </h1>
-        <p class="text-xs md:text-sm text-purple-200/80 max-w-xl mx-auto font-light leading-relaxed mb-6">
-            Un espacio creado con todo mi corazón para celebrar nuestros momentos, promesas, cartas y secretos.
+        
+        <p class="text-xs md:text-base text-purple-200/80 max-w-2xl mx-auto font-light leading-relaxed mb-8">
+            Bienvenida a tu rincón secreto en el cosmos. Un espacio diseñado especialmente para ti, repleto de nuestras cartas, memorias, promesas y detalles eternos.
         </p>
 
-        <!-- Real-Time Duration Clock Counter -->
-        <div class="glass-panel max-w-2xl mx-auto rounded-3xl p-4 md:p-5 border border-pink-500/30 shadow-[0_0_30px_rgba(255,42,133,0.15)]">
-            <span class="text-[11px] uppercase font-bold tracking-widest text-amber-300/90 block mb-2 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-clock-rotate-left text-xs"></i> Tiempo Juntos Escribiendo Esta Historia
-            </span>
-            <div class="grid grid-cols-4 gap-2 md:gap-4">
-                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-pink-500/20">
-                    <span id="counter-days" class="block text-xl md:text-3xl font-black text-pink-400">00</span>
-                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Días</span>
+        <!-- LIVE ANNIVERSARY REAL-TIME TIMER CLOCK -->
+        <div class="glass-panel max-w-3xl mx-auto rounded-3xl p-6 border border-pink-500/30 shadow-[0_0_50px_rgba(255,42,133,0.15)] relative overflow-hidden mb-8">
+            <div class="absolute -top-10 -left-10 w-32 h-32 bg-pink-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <i class="fa-solid fa-clock text-amber-300 text-sm"></i>
+                <span class="text-xs uppercase font-extrabold tracking-widest text-amber-300">Tiempo Juntos Escribiendo Esta Historia</span>
+            </div>
+
+            <div class="grid grid-cols-4 gap-3 md:gap-6">
+                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-pink-500/20">
+                    <span id="counter-days" class="block text-2xl md:text-4xl font-black text-pink-400 font-mono">00</span>
+                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Días</span>
                 </div>
-                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-purple-500/20">
-                    <span id="counter-hours" class="block text-xl md:text-3xl font-black text-purple-300">00</span>
-                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Horas</span>
+                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-purple-500/20">
+                    <span id="counter-hours" class="block text-2xl md:text-4xl font-black text-purple-300 font-mono">00</span>
+                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Horas</span>
                 </div>
-                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-amber-500/20">
-                    <span id="counter-minutes" class="block text-xl md:text-3xl font-black text-amber-300">00</span>
-                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Minutos</span>
+                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-amber-500/20">
+                    <span id="counter-minutes" class="block text-2xl md:text-4xl font-black text-amber-300 font-mono">00</span>
+                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Minutos</span>
                 </div>
-                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-pink-400/20">
-                    <span id="counter-seconds" class="block text-xl md:text-3xl font-black text-rose-400 animate-pulse">00</span>
-                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Segundos</span>
+                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-rose-400/20">
+                    <span id="counter-seconds" class="block text-2xl md:text-4xl font-black text-rose-400 font-mono animate-pulse">00</span>
+                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Segundos</span>
                 </div>
             </div>
-            <p class="text-[10px] text-purple-300/60 mt-2 italic">
-                Oficialmente juntos desde el 26 de Septiembre de 2026 ❤️
+
+            <p class="text-xs text-purple-200/60 mt-4 italic font-serif">
+                Oficialmente juntos desde el <strong class="text-pink-300 font-sans">26 de Septiembre de 2026</strong> ❤️
             </p>
         </div>
+
+        <!-- ROTATING INSTANT LOVE NOTE BUTTON -->
+        <div class="max-w-xl mx-auto">
+            <button onclick="rotateLoveQuote()" class="group relative inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 text-white font-bold text-xs md:text-sm tracking-wide shadow-[0_0_30px_rgba(255,42,133,0.4)] hover:shadow-[0_0_40px_rgba(255,42,133,0.7)] hover:scale-105 active:scale-95 transition-all duration-300">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-base group-hover:rotate-12 transition-transform"></i>
+                <span>Generar Nota de Amor Instantánea</span>
+                <i class="fa-solid fa-heart text-pink-200"></i>
+            </button>
+
+            <!-- LOVE NOTE DISPLAY BANNER -->
+            <div id="love-note-box" class="mt-4 glass-panel p-4 rounded-2xl border border-pink-500/30 hidden animate-fadeIn">
+                <p id="love-note-text" class="font-serif italic text-sm md:text-base text-pink-100 leading-relaxed">
+                    "Cargando mensajito especial..."
+                </p>
+            </div>
+        </div>
+
     </header>
 
-    <!-- NAVIGATION MENU SWITCHER -->
-    <nav class="sticky top-3 z-40 max-w-4xl mx-auto px-4 my-6">
-        <div class="glass-panel p-1.5 rounded-2xl border border-purple-500/30 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar shadow-2xl">
+    <!-- MAIN NAVIGATION BAR (STICKY) -->
+    <nav class="sticky top-4 z-40 max-w-5xl mx-auto px-4 my-8">
+        <div class="glass-panel p-2 rounded-2xl border border-purple-500/30 flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar shadow-2xl">
             
-            <button onclick="switchTab('tab-history', this)" class="nav-tab-btn nav-tab-active flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+            <button onclick="switchTab('tab-letters', this)" class="nav-tab-btn nav-tab-active flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-envelope-open-text text-pink-300"></i>
+                <span>Cartas & Poemas</span>
+            </button>
+
+            <button onclick="switchTab('tab-history', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
                 <i class="fa-solid fa-timeline text-amber-300"></i>
                 <span>Nuestra Historia</span>
             </button>
 
-            <button onclick="switchTab('tab-letters', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-envelope-open-text text-pink-400"></i>
-                <span>Cartas Secretas</span>
-            </button>
-
-            <button onclick="switchTab('tab-coupons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+            <button onclick="switchTab('tab-coupons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
                 <i class="fa-solid fa-ticket text-rose-400"></i>
                 <span>Vales & Promesas</span>
             </button>
 
-            <button onclick="switchTab('tab-music', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-music text-purple-400"></i>
-                <span>Playlist & Música</span>
+            <button onclick="switchTab('tab-music', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-music text-purple-300"></i>
+                <span>Playlist Vibe</span>
             </button>
 
-            <button onclick="switchTab('tab-reasons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-star text-yellow-300"></i>
-                <span>Razones Únicas</span>
+            <button onclick="switchTab('tab-reasons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-star text-goldWarm"></i>
+                <span>Constelación</span>
+            </button>
+
+            <button onclick="switchTab('tab-surprises', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-box-open text-cyanNeon"></i>
+                <span>Caja Sorpresa</span>
             </button>
 
         </div>
     </nav>
 
-    <!-- VIEWPORT MAIN CONTAINER -->
+    <!-- CONTENT VIEWPORTS CONTAINER -->
     <main class="relative z-10 max-w-5xl mx-auto px-4">
 
         <!-- ============================================================ -->
-        <!-- TAB 1: NUESTRA HISTORIA (INTERACTIVE TIMELINE & MILESTONES) -->
+        <!-- TAB 1: CARTAS & POEMAS SECRETOS (VAULT ROOM) -->
         <!-- ============================================================ -->
-        <section id="tab-history" class="tab-view block space-y-6 animate-fadeIn">
-            <div class="text-center max-w-lg mx-auto mb-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">Línea del Tiempo</span>
-                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Capítulos de Nuestra Historia</h2>
-                <p class="text-xs text-purple-200/70 mt-1">Haz clic en cada momento para desplegar los detalles completos y recuerdos.</p>
+        <section id="tab-letters" class="tab-view block space-y-6">
+            <div class="text-center max-w-lg mx-auto mb-8">
+                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Bóveda del Corazón</span>
+                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Cartas & Poemas Escritos Para Ti</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Haz clic sobre cualquiera de los sobres lacrados para romper el sello y leer la carta completa.</p>
             </div>
 
-            <!-- Vertical Timeline Container -->
-            <div class="relative border-l-2 border-pink-500/30 ml-4 md:ml-32 space-y-8 pb-4">
-
-                <!-- Milestone Item 1 -->
-                <div class="relative pl-6 md:pl-8 group">
-                    <!-- Point Indicator -->
-                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-pink-500 border-4 border-darkDeep shadow-[0_0_12px_#ff2a85] group-hover:scale-125 transition-transform"></div>
-                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-purple-950/80 px-2.5 py-1 rounded-md border border-amber-500/30">Hito #1 • El Inicio</span>
-                    
-                    <div class="glass-card rounded-2xl p-5 mt-2 border border-purple-500/20">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="text-lg font-bold text-white font-serif">El Primer Mensaje & La Conexión</h3>
-                            <button onclick="toggleFavorite(this)" class="text-purple-400 hover:text-rose-500 transition-colors p-1" title="Guardar en favoritos">
-                                <i class="fa-regular fa-heart text-base"></i>
-                            </button>
-                        </div>
-                        <p class="text-xs text-purple-200/80 leading-relaxed mb-3">
-                            Aquel primer día en que empezamos a hablar sin sospechar todo lo hermoso que estaba a punto de nacer. Lo que comenzó como una conversación más se convirtió rápidamente en mi momento favorito del día.
-                        </p>
-                        <div class="bg-purple-950/50 p-3 rounded-xl border border-dashed border-purple-500/30 text-[11px] text-pink-200/90 italic font-serif">
-                            <i class="fa-solid fa-quote-left text-pink-400 mr-1"></i> "Desde el primer saludo sentí algo totalmente diferente en ti."
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Milestone Item 2 -->
-                <div class="relative pl-6 md:pl-8 group">
-                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-purple-500 border-4 border-darkDeep shadow-[0_0_12px_#a855f7] group-hover:scale-125 transition-transform"></div>
-                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-purple-950/80 px-2.5 py-1 rounded-md border border-amber-500/30">Hito #2 • Primera Cita</span>
-                    
-                    <div class="glass-card rounded-2xl p-5 mt-2 border border-purple-500/20">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="text-lg font-bold text-white font-serif">Nuestra Primera Salida Juntos</h3>
-                            <button onclick="toggleFavorite(this)" class="text-purple-400 hover:text-rose-500 transition-colors p-1" title="Guardar en favoritos">
-                                <i class="fa-regular fa-heart text-base"></i>
-                            </button>
-                        </div>
-                        <p class="text-xs text-purple-200/80 leading-relaxed mb-3">
-                            Verte frente a mí, tu sonrisa en persona y la risa contagiosa que compartimos. Ese día comprendí que estar a tu lado siempre se sentía como estar en casa.
-                        </p>
-                        <div class="flex gap-2 flex-wrap text-[10px]">
-                            <span class="px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30">✨ Sonrisas Inolvidables</span>
-                            <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">☕ Charla de Horas</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Milestone Item 3 (Official Date) -->
-                <div class="relative pl-6 md:pl-8 group">
-                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-amber-400 border-4 border-darkDeep shadow-[0_0_15px_#f59e0b] group-hover:scale-125 transition-transform"></div>
-                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-amber-950/80 px-2.5 py-1 rounded-md border border-amber-500/40">26 de Septiembre de 2026 • El Gran Día</span>
-                    
-                    <div class="glass-card rounded-2xl p-5 mt-2 border-2 border-amber-500/40 bg-gradient-to-br from-purple-900/40 to-pink-950/30">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="text-xl font-bold text-amber-200 font-serif">¡Nos Volvimos Novios! ❤️</h3>
-                            <button onclick="toggleFavorite(this)" class="text-rose-500 p-1" title="Favorito">
-                                <i class="fa-solid fa-heart text-base"></i>
-                            </button>
-                        </div>
-                        <p class="text-xs text-purple-100 leading-relaxed mb-3">
-                            El momento oficial en que nuestras vidas se unieron de forma especial. Decirte lo que sentía y escuchar tu respuesta es uno de los mejores recuerdos de toda mi vida.
-                        </p>
-                        <div class="bg-amber-950/60 p-3 rounded-xl border border-amber-500/40 text-[11px] text-amber-200 italic font-serif">
-                            "El comienzo de nuestra mejor aventura juntos."
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Milestone Item 4 -->
-                <div class="relative pl-6 md:pl-8 group">
-                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-500 border-4 border-darkDeep shadow-[0_0_12px_#f43f5e] group-hover:scale-125 transition-transform"></div>
-                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-purple-950/80 px-2.5 py-1 rounded-md border border-amber-500/30">El Presente y El Futuro</span>
-                    
-                    <div class="glass-card rounded-2xl p-5 mt-2 border border-purple-500/20">
-                        <div class="flex items-center justify-between gap-2 mb-2">
-                            <h3 class="text-lg font-bold text-white font-serif">Todos los Días Que Faltan por Construir</h3>
-                            <button onclick="toggleFavorite(this)" class="text-purple-400 hover:text-rose-500 transition-colors p-1">
-                                <i class="fa-regular fa-heart text-base"></i>
-                            </button>
-                        </div>
-                        <p class="text-xs text-purple-200/80 leading-relaxed">
-                            Esto es solo el comienzo. Faltan miles de viajes, risas, tardes tranquilas y momentos inolvidables por escribir juntos.
-                        </p>
-                    </div>
-                </div>
-
+            <!-- ENVELOPES GRID -->
+            <div id="letters-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically populated via JavaScript -->
             </div>
         </section>
 
         <!-- ============================================================ -->
-        <!-- TAB 2: CARTAS Y POEMAS SECRETOS (INTERACTIVE VAULT) -->
+        <!-- TAB 2: NUESTRA HISTORIA (INTERACTIVE TIMELINE & MEMORIES) -->
         <!-- ============================================================ -->
-        <section id="tab-letters" class="tab-view hidden space-y-6 animate-fadeIn">
+        <section id="tab-history" class="tab-view hidden space-y-8">
             <div class="text-center max-w-lg mx-auto mb-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Bóveda Privada</span>
-                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Cartas Secretas & Escritos</h2>
-                <p class="text-xs text-purple-200/70 mt-1">Selecciona cualquier sobre para desplegar la lectura romántica completa.</p>
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">Línea del Tiempo Interactiva</span>
+                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Nuestra Historia Capítulo a Capítulo</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Filtra nuestros recuerdos o agrega tus propios deseos para el futuro.</p>
             </div>
 
-            <!-- Envelope Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- TIMELINE CATEGORY FILTERS -->
+            <div class="flex items-center justify-center gap-2 flex-wrap mb-6">
+                <button onclick="filterTimeline('all', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-pink-600 text-white shadow-md border border-pink-400">Todos</button>
+                <button onclick="filterTimeline('inicios', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">El Comienzo</button>
+                <button onclick="filterTimeline('especiales', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Momentos Clave</button>
+                <button onclick="filterTimeline('risas', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Aventuras & Risas</button>
+            </div>
 
-                <!-- Envelope 1 -->
-                <div class="glass-card rounded-3xl p-6 relative overflow-hidden border border-pink-500/30 flex flex-col justify-between">
+            <!-- TIMELINE CONTAINER -->
+            <div class="relative border-l-2 border-pink-500/30 ml-4 md:ml-32 space-y-8 pb-4" id="timeline-container">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+
+            <!-- ADD NEW FUTURE WISH / CHAPTER FORM -->
+            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-amber-500/30 max-w-2xl mx-auto mt-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 text-lg">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
                     <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-[9px] font-bold uppercase tracking-widest text-pink-300 bg-pink-950/80 px-2.5 py-0.5 rounded-full border border-pink-500/40">Carta #1 • Para Cuando Me Extrañes</span>
-                            <i class="fa-solid fa-envelope text-pink-400 text-lg"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white font-serif mb-2">Un Abrazito Digital</h3>
-                        <p class="text-xs text-purple-200/70 italic leading-relaxed mb-4">
-                            "Si estás leyendo
+                        <h3 class="text-lg font-bold text-white font-serif">Agregar Nuestro Próximo Capítulo</h3>
+                        <p class="text-xs text-purple-200/70">¿Qué sueño o momento deseas que vivamos juntos pronto?</p>
+                    </div>
+                </div>
+
+                <form onsubmit="handleAddWish(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300 mb-1">Título del Deseo</label>
+                        <input type="text" id="wish-title" required placeholder="Ej: Viaje a la playa juntos, Noche de picnic..." class="w-full bg-purple-950/50 border border-purple-500/30 rounded-xl px-4 py-2.5 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-pink-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300 mb-1">Detalles o Promesa</label>
+                        <textarea id="wish-desc" required rows="3" placeholder="Escribe aquí por qué quieres que hagamos esto..." class="w-full bg-purple-950/50 border border-purple-500/30 rounded-xl px-4 py-2.5 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-pink-500 transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-pink-600 font-bold text-slate-950 text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-plus-circle"></i> Guardar Capítulo en Nuestra Lista
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 3: VALES & PROMESAS (INTERACTIVE REDEEMABLE VOUCHERS) -->
+        <!-- ============================================================ -->
+        <section id="tab-coupons" class="tab-view hidden space-y-6">
+            <div class="text-center max-w-lg mx-auto mb-8">
+                <span class="text-xs font-bold uppercase tracking-widest text-rose-400 bg-rose-950/60 px-3 py-1 ro
