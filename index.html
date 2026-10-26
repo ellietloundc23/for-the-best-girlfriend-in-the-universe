@@ -150,7 +150,7 @@
             line-height: 1.4;
         }
 
-        /* Colores de Raresas */
+        /* Colores de Rarezas */
         .common { border-color: #a0a0a0; }
         .common .rarity-tag { background: #666; color: #fff; }
 
@@ -217,77 +217,11 @@
     </div>
 
     <script>
-        // FECHA DE INICIO DE LA RELACIÓN
-        const startDate = new Date(2026, 8, 25, 0, 0, 0);
+        // FECHA DE INICIO: 26 DE SEPTIEMBRE DE 2026
+        const startDate = new Date(2026, 8, 26, 0, 0, 0);
 
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
 
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            document.getElementById('minutes').innerText = Math.floor((diff / (1000 * 60)) % 60);
-            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
-        }
-        setInterval(updateTimer, 1000);
-        updateTimer();
-
-        // BASE DE DATOS DEL RNG (32 ÍTEMS)
-        const lootTable = {
-            common: [
-                "Recuerdo: La primera vez que nos quedamos hablando hasta tarde.",
-                "Dato: Me encanta la forma en la que te ríes sin darte cuenta.",
-                "Recuerdo: La primera foto que me enviaste.",
-                "Mini-Detalle: Cada vez que veo una notificación tuya, me cambia el ánimo.",
-                "Fact: Eres la persona más linda de todo mi feed de la vida.",
-                "Dato: Tienes los ojos y la sonrisa más bonita que he visto.",
-                "Recuerdo: La primera canción que me hizo pensar en ti.",
-                "Mini-Detalle: Me sé de memoria las cosas que te hacen sonreír.",
-                "Fact: Si pudiera elegir con quién hablar todos los días, te elegiría mil veces a ti.",
-                "Recuerdo: Ese mensaje tuyo que guardé en favoritos."
-            ],
-            rare: [
-                "🎟️ CUPÓN: Válido por una salida a comer lo que tú quieras.",
-                "🎟️ CUPÓN: Válido por un masaje relajante cuando estés estresada.",
-                "🎟️ CUPÓN: Tú eliges la película o serie la próxima vez.",
-                "🎟️ CUPÓN: Válido por un día entero donde yo hago lo que me pidas.",
-                "🎟️ CUPÓN: Un abrazo gigante de más de 1 minuto sin soltarte.",
-                "🎟️ CUPÓN: Válido por tu postre/dulce favorito pagado por mí.",
-                "🎟️ CUPÓN: Noche de llamadas/juegos hasta la hora que quieras.",
-                "🎟️ CUPÓN: Tienes derecho a ganarme cualquier discusión hoy."
-            ],
-            epic: [
-                "💌 Carta Corta: Gracias por llegar a mi vida y hacer que todo sea más bonito.",
-                "💌 Carta Corta: No importa qué tan difícil sea el día, hablar contigo lo arregla.",
-                "💌 Carta Corta: Admiro muchísimo lo fuerte y dedicada que eres.",
-                "💌 Carta Corta: Me encanta la química que tenemos, se siente tan natural.",
-                "💌 Carta Corta: Eres mi lugar seguro y mi persona favorita.",
-                "💌 Carta Corta: Contigo aprendí lo que es querer a alguien bonito y de verdad."
-            ],
-            legendary: [
-                "👑 PROMESA LEGENDARIA: Prometo estar siempre a tu lado apoyándote en cada meta.",
-                "👑 SECRETO LEGENDARIO: Desde el primer momento supe que ibas a ser alguien muy especial para mí.",
-                "👑 PROMESA LEGENDARIA: Vamos a viajar y conocer lugares increíbles juntos.",
-                "👑 RECOMPENSA LEGENDARIA: ¡Ganaste el premio gordo! Reclámame un regalo sorpresa en persona. ❤️"
-            ]
-        };
-
-        let unlockedItems = new Set();
-        const totalItemsCount = lootTable.common.length + lootTable.rare.length + lootTable.epic.length + lootTable.legendary.length;
-        document.getElementById('total-count').innerText = totalItemsCount;
-
-        function spinRNG() {
-            const rewardBox = document.getElementById('reward-box');
-            const rarityTag = document.getElementById('rarity');
-            const rewardText = document.getElementById('reward-text');
-
-            rewardBox.style.display = 'flex';
-            rewardBox.className = 'reward-card'; // reset classes
-
-            const rand = Math.random() * 100;
-            let rarity = 'common';
-            let item = '';
-
-            if (rand < 5) {
-                // 5% Legendario
-                rarity = 'legend
+            document.getElementById('days').innerText = Math.floor
