@@ -1,227 +1,345 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para la mejor novia del universo ❤️</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    <title>Mercado de Amor ❤️ | Tu Marketplace de Recuerdos y Poemas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins y Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        darkBg: '#090314',
+                        neonPink: '#ff007f',
+                        neonPurple: '#8b5cf6',
+                        crimsonLove: '#e11d48',
+                        goldAccent: '#f59e0b',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
+                        'float-gentle': 'floatGentle 4s ease-in-out infinite',
+                        'sparkle': 'sparkle 1.5s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(255, 0, 127, 0.3), 0 0 30px rgba(139, 92, 246, 0.2)' },
+                            '100%': { boxShadow: '0 0 35px rgba(255, 0, 127, 0.7), 0 0 50px rgba(245, 158, 11, 0.4)' }
+                        },
+                        floatGentle: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        },
+                        sparkle: {
+                            '0%': { filter: 'brightness(1)' },
+                            '100%': { filter: 'brightness(1.4) drop-shadow(0 0 8px #f59e0b)' }
+                        }
+                    }
+                }
+            }
         }
-
+    </script>
+    
+    <style>
+        /* Base Styling & Background */
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px 15px;
+            background-color: #090314;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(15, 5, 30, 1) 0%, transparent 100%);
+            background-attachment: fixed;
+            color: #f8fafc;
             overflow-x: hidden;
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(10px);
-            padding: 35px 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            max-width: 650px;
-            width: 100%;
-            z-index: 10;
-            text-align: center;
-            margin-bottom: 25px;
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: rgba(22, 10, 40, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 0, 127, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 12px;
-            color: #ff758c;
-            text-shadow: 0 0 10px rgba(255, 117, 140, 0.5);
+        .glass-card:hover {
+            border-color: rgba(255, 0, 127, 0.45);
         }
 
-        p.subtitle {
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-            color: #ddd;
+        .glass-gold {
+            background: rgba(30, 18, 5, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
         }
 
-        .timer {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .time-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .time-box span {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ff758c;
-        }
-
-        .time-box label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #aaa;
-        }
-
-        /* SECCIÓN RNG / GACHA */
-        .rng-section {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px dashed rgba(255, 117, 140, 0.4);
-            margin-top: 20px;
-        }
-
-        .rng-title {
-            font-size: 1.4rem;
-            color: #ffb199;
-            margin-bottom: 10px;
-        }
-
-        .counter-tracker {
-            font-size: 0.9rem;
-            color: #bbb;
-            margin-bottom: 15px;
-        }
-
-        .spin-btn {
-            background: linear-gradient(45deg, #ff758c, #ff7eb3);
-            border: none;
-            color: white;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .spin-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
-        }
-
-        .spin-btn:active {
-            transform: scale(0.95);
-        }
-
-        .reward-card {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid transparent;
-            min-height: 110px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .rarity-tag {
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .reward-text {
-            font-size: 1.1rem;
-            line-height: 1.4;
-        }
-
-        /* Colores de Rarezas */
-        .common { border-color: #a0a0a0; }
-        .common .rarity-tag { background: #666; color: #fff; }
-
-        .rare { border-color: #4facfe; box-shadow: 0 0 10px rgba(79, 172, 254, 0.3); }
-        .rare .rarity-tag { background: #00f2fe; color: #000; }
-
-        .epic { border-color: #b224ef; box-shadow: 0 0 15px rgba(178, 36, 239, 0.4); }
-        .epic .rarity-tag { background: #b224ef; color: #fff; }
-
-        .legendary { border-color: #f9d423; box-shadow: 0 0 20px rgba(249, 212, 35, 0.6); animation: pulse 1.5s infinite alternate; }
-        .legendary .rarity-tag { background: #f9d423; color: #000; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.02); }
-        }
-
-        .heart {
+        /* Background Floating Hearts/Sparkles */
+        .particle {
             position: fixed;
-            bottom: -20px;
-            font-size: 20px;
-            color: #ff758c;
-            animation: float 6s linear infinite;
-            opacity: 0.7;
-            z-index: 1;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            animation: floatParticle linear infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(105vh) scale(0.4) rotate(0deg);
+                opacity: 0;
+            }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% {
+                transform: translateY(-10vh) scale(1.1) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        @media (max-width: 480px) {
-            .timer { grid-template-columns: repeat(2, 1fr); }
-            h1 { font-size: 1.7rem; }
-        }
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #090314; }
+        ::-webkit-scrollbar-thumb { background: #ff007f; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
     </style>
 </head>
-<body>
+<body class="min-h-screen font-sans pb-24 relative selection:bg-pink-500 selection:text-white">
 
-    <div class="container">
-        <h1>Para la mejor novia del universo ✨</h1>
-        <p class="subtitle">Llevamos juntos y sumando momentos:</p>
+    <!-- Ambient Particle System Container -->
+    <div id="particles-root" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
-        <div class="timer">
-            <div class="time-box"><span id="days">0</span><label>Días</label></div>
-            <div class="time-box"><span id="hours">0</span><label>Horas</label></div>
-            <div class="time-box"><span id="minutes">0</span><label>Minutos</label></div>
-            <div class="time-box"><span id="seconds">0</span><label>Segundos</label></div>
-        </div>
-
-        <!-- SECCIÓN DE RNG -->
-        <div class="rng-section">
-            <div class="rng-title">🎰 Gacha de Recuerdos & Premios</div>
-            <div class="counter-tracker">Colección descubierta: <b id="unlocked-count">0</b> / <b id="total-count">0</b></div>
+    <!-- HEADER DE MERCADO MODERNO -->
+    <header class="sticky top-0 z-40 glass-card bg-opacity-90 border-b border-pink-500/30 px-4 py-3 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             
-            <button class="spin-btn" onclick="spinRNG()">✨ TIRAR RNG (Abrir regalo) ✨</button>
+            <!-- Logo & Brand -->
+            <div class="flex items-center justify-between w-full md:w-auto">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('tab-home')">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center text-white text-xl shadow-[0_0_15px_rgba(255,0,127,0.5)]">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-amber-200 tracking-tight">LoveMarket</span>
+                        <span class="text-[10px] block font-semibold text-pink-400/80 -mt-1 tracking-wider uppercase">Secretaría de Amor VIP</span>
+                    </div>
+                </div>
 
-            <div id="reward-box" class="reward-card common" style="display: none;">
-                <div id="rarity" class="rarity-tag">Común</div>
-                <div id="reward-text" class="reward-text">¡Haz clic arriba para lanzar tu primer tiro!</div>
+                <!-- Balance / Carrito Mobile Toggle -->
+                <div class="flex items-center gap-2 md:hidden">
+                    <div class="flex items-center gap-1.5 bg-purple-950/80 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-bold text-amber-300">
+                        <i class="fa-solid fa-heart text-pink-500"></i>
+                        <span id="balance-mobile">1000</span>
+                    </div>
+                    <button onclick="openCartModal()" class="relative p-2 rounded-xl bg-purple-900/50 border border-pink-500/30 text-pink-300">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-badge-mobile" class="absolute -top-1 -right-1 bg-pink-600 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
             </div>
+
+            <!-- Buscador Decorativo Interactivo -->
+            <div class="w-full md:max-w-md relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-purple-400 text-sm"></i>
+                <input type="text" id="market-search" onkeyup="handleSearch()" placeholder="Buscar poemas, cupones o secretitos..." 
+                    class="w-full bg-purple-950/50 border border-pink-500/25 rounded-2xl pl-10 pr-4 py-2 text-xs md:text-sm text-pink-100 placeholder-purple-400/60 focus:outline-none focus:border-pink-500 transition-all shadow-inner">
+            </div>
+
+            <!-- User Balance, Cart & Avatar (Desktop) -->
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Puntos de Amor -->
+                <div class="flex items-center gap-2 bg-purple-950/80 border border-amber-500/50 px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                    <i class="fa-solid fa-heart text-pink-500 text-base animate-pulse"></i>
+                    <div class="flex flex-col">
+                        <span class="text-[9px] uppercase tracking-wider text-purple-300 font-semibold leading-tight">Puntos de Amor:</span>
+                        <span id="balance-desktop" class="font-black text-amber-300 text-sm leading-tight tracking-wide">1000</span>
+                    </div>
+                </div>
+
+                <!-- Carrito de Compras -->
+                <button onclick="openCartModal()" class="relative flex items-center gap-2 bg-pink-950/40 hover:bg-pink-900/60 border border-pink-500/40 px-4 py-2 rounded-2xl text-pink-200 text-sm font-semibold transition-all">
+                    <i class="fa-solid fa-cart-shopping text-pink-400"></i>
+                    <span>Carrito</span>
+                    <span id="cart-badge-desktop" class="bg-pink-600 text-white text-xs font-black px-2 py-0.5 rounded-full ml-1">0</span>
+                </button>
+
+                <!-- Avatar Novia VIP -->
+                <div class="flex items-center gap-2 border-l border-purple-800/60 pl-3">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-pink-400 to-purple-600 p-0.5 shadow-md">
+                        <div class="w-full h-full bg-purple-950 rounded-full flex items-center justify-center text-pink-300 text-sm font-bold">
+                            👑
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold text-pink-200">Mi Novia VIP</span>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </header>
 
-    <script>
-        // FECHA DE INICIO: 26 DE SEPTIEMBRE DE 2026
-        const startDate = new Date(2026, 8, 26, 0, 0, 0);
+    <!-- NAVEGACIÓN PRINCIPAL TIPO CATEGORÍAS MARKETPLACE -->
+    <nav class="sticky top-[61px] md:top-[69px] z-30 glass-card bg-opacity-95 border-b border-purple-500/20 py-2 px-4 shadow-xl">
+        <div class="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-2 md:gap-4 overflow-x-auto no-scrollbar">
+            
+            <button onclick="switchTab('tab-home')" id="btn-tab-home" class="nav-tab active-tab px-4 py-2 rounded-xl text-xs md:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2">
+                <i class="fa-solid fa-house"></i> Inicio / Destacados
+            </button>
 
-        function updateTimer() {
-            const now = new Date();
-            const diff = now - startDate;
+            <button onclick="switchTab('tab-poems')" id="btn-tab-poems" class="nav-tab px-4 py-2 rounded-xl text-xs md:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2">
+                <i class="fa-solid fa-feather-pointed"></i> Colección de Poemas
+            </button>
 
-            document.getElementById('days').innerText = Math.floor
+            <button onclick="switchTab('tab-secrets')" id="btn-tab-secrets" class="nav-tab px-4 py-2 rounded-xl text-xs md:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2">
+                <i class="fa-solid fa-vault"></i> Bóveda de Secretos
+            </button>
+
+            <button onclick="switchTab('tab-gacha')" id="btn-tab-gacha" class="nav-tab px-4 py-2 rounded-xl text-xs md:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2">
+                <i class="fa-solid fa-dice"></i> Ruleta RNG
+            </button>
+
+            <button onclick="switchTab('tab-coupons')" id="btn-tab-coupons" class="nav-tab px-4 py-2 rounded-xl text-xs md:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2">
+                <i class="fa-solid fa-ticket"></i> Catálogo de Cupones
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL DE PÁGINAS (SINGLE PAGE APP) -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 pt-6">
+
+        <!-- ========================================== -->
+        <!-- PESTAÑA 1: INICIO / DESTACADOS -->
+        <!-- ========================================== -->
+        <section id="tab-home" class="tab-content block space-y-8 animate-fadeIn">
+            
+            <!-- Hero Banner Aniversario -->
+            <div class="relative glass-card rounded-3xl p-6 md:p-10 overflow-hidden border-2 border-pink-500/30 shadow-[0_0_40px_rgba(255,0,127,0.25)]">
+                <div class="absolute -top-24 -right-24 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4">
+                        <span class="inline-block px-3 py-1 rounded-full bg-pink-500/20 border border-pink-400/40 text-pink-300 text-xs font-bold uppercase tracking-widest">
+                            ✨ Aniversario Oficial VIP ✨
+                        </span>
+                        <h1 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-amber-200 leading-tight">
+                            Tu Tienda de Amor & Colección de Recuerdos
+                        </h1>
+                        <p class="text-xs md:text-sm text-purple-200/80 leading-relaxed max-w-xl">
+                            Un espacio privado diseñado especialmente para ti. Explora nuestros versos, desbloquea secretos de nuestra historia y canjea tus puntos por experiencias inolvidables.
+                        </p>
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <button onclick="switchTab('tab-coupons')" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-xs md:text-sm shadow-lg shadow-pink-600/30 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-store"></i> Ir al Mercado
+                            </button>
+                            <button onclick="switchTab('tab-gacha')" class="px-5 py-2.5 rounded-2xl bg-purple-950/80 hover:bg-purple-900 border border-amber-500/40 text-amber-300 font-bold text-xs md:text-sm transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-clover"></i> Probar Ruleta RNG
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contador en Tiempo Real Widget -->
+                    <div class="lg:col-span-5 glass-gold rounded-2xl p-5 border border-amber-500/40 text-center">
+                        <h2 class="text-sm font-bold text-amber-300 uppercase tracking-wider mb-4 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-clock-rotate-left"></i> Tiempo Construyendo Recuerdos
+                        </h2>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="bg-purple-950/60 p-2.5 rounded-xl border border-pink-500/30">
+                                <span id="timer-days" class="block text-2xl md:text-3xl font-black text-pink-400">00</span>
+                                <span class="text-[9px] uppercase font-bold text-purple-300">Días</span>
+                            </div>
+                            <div class="bg-purple-950/60 p-2.5 rounded-xl border border-purple-500/30">
+                                <span id="timer-hours" class="block text-2xl md:text-3xl font-black text-purple-300">00</span>
+                                <span class="text-[9px] uppercase font-bold text-purple-300">Horas</span>
+                            </div>
+                            <div class="bg-purple-950/60 p-2.5 rounded-xl border border-amber-500/30">
+                                <span id="timer-minutes" class="block text-2xl md:text-3xl font-black text-amber-300">00</span>
+                                <span class="text-[9px] uppercase font-bold text-purple-300">Min</span>
+                            </div>
+                            <div class="bg-purple-950/60 p-2.5 rounded-xl border border-pink-400/30">
+                                <span id="timer-seconds" class="block text-2xl md:text-3xl font-black text-rose-400">00</span>
+                                <span class="text-[9px] uppercase font-bold text-purple-300">Seg</span>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-amber-200/60 mt-3 italic">Medido desde el 26 de Septiembre de 2026 ❤️</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destacados del Día / Grid Promocional -->
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold text-pink-300 flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-amber-400"></i> Destacados de la Semana
+                    </h2>
+                    <span class="text-xs text-purple-300/70">Ofertas de Amor Exclusivas</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="home-featured-grid">
+                    <!-- Se llena con JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PESTAÑA 2: COLECCIÓN DE POEMAS -->
+        <!-- ========================================== -->
+        <section id="tab-poems" class="tab-content hidden space-y-6 animate-fadeIn">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs uppercase font-bold tracking-widest text-pink-400 bg-pink-950/50 px-3 py-1 rounded-full border border-pink-500/30">
+                    Edición Limitada
+                </span>
+                <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-200 font-serif">
+                    Galería de Poemas & Escritos
+                </h2>
+                <p class="text-xs md:text-sm text-purple-200/70">
+                    Cada tarjeta es una publicación especial. Haz clic para desplegar la lectura completa y guardarla en tus favoritos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="poems-grid">
+                <!-- Se llena con JS -->
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PESTAÑA 3: BÓVEDA DE SECRETOS -->
+        <!-- ========================================== -->
+        <section id="tab-secrets" class="tab-content hidden space-y-6 animate-fadeIn">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs uppercase font-bold tracking-widest text-amber-300 bg-amber-950/50 px-3 py-1 rounded-full border border-amber-500/30">
+                    Acceso Restringido VIP
+                </span>
+                <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-300 to-purple-200">
+                    Bóveda de Secretos & Recuerdos
+                </h2>
+                <p class="text-xs md:text-sm text-purple-200/70">
+                    Presiona sobre los cofres o sellos protegidos para revelar confesiones y momentos inolvidables.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="secrets-grid">
+                <!-- Se llena con JS -->
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PESTAÑA 4: RULETA RNG / GACHA -->
+        <!-- ========================================== -->
+        <section id="tab-gacha" class="tab-content hidden space-y-6 animate-fadeIn">
+            <div class="glass-card gold-panel rounded-3xl p-6 md:p-10 max-w-3xl mx-auto text-center relative overflow-hidden border-2 border-amber-500/40">
+                <div class="absolute -top-12 -right-12 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl"></div>
+
+                <span class="text-xs uppercase font-black tracking-widest text-amber-300 bg-amber-950/80 px-4 py-1.5 rounded-full border border-amber-500/40 inline-block mb-3">
+                    🎰 Ruleta de la Fortuna
+                </spa
