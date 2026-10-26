@@ -1,9 +1,158 @@
-.Para_ti {
-  position: absolute;
-  width: 90%;
-  font-size: 2rem;
-  font-family: "te amo";
-  height: var(--letter-love);
-  transform: translateX(-50%);
-  background: var(--letter);
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Ti ❤️</title>
+  <style>
+    :root {
+      --bg-color: #ffeef2;
+      --letter: #ffffff;
+      --letter-love: 400px;
+      --text-color: #d63031;
+      --accent-color: #ff7675;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Tu clase corregida y adaptada para centrarse perfectamente */
+    .Para_ti {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 90%;
+      max-width: 500px;
+      height: var(--letter-love);
+      font-size: 1.2rem; /* Ajustado para que el texto largo quepa bien */
+      font-family: sans-serif; /* Cambia "te amo" por una fuente del sistema si no la tienes instalada */
+      background: var(--letter);
+      transform: translate(-50%, -50%);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(214, 48, 49, 0.15);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid #fdcb6e;
+    }
+
+    .corazon-principal {
+      font-size: 3rem;
+      animation: latido 1.2s infinite;
+    }
+
+    h1 {
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #636e72;
+      line-height: 1.6;
+    }
+
+    .boton-amor {
+      background-color: var(--text-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+      font-weight: bold;
+    }
+
+    .boton-amor:hover {
+      background-color: var(--accent-color);
+      transform: scale(1.05);
+    }
+
+    /* Animación de latido para el corazón */
+    @keyframes latido {
+      0% { transform: scale(1); }
+      20% { transform: scale(1.1); }
+      40% { transform: scale(1.05); }
+      60% { transform: scale(1.15); }
+      80% { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Corazones flotantes del fondo */
+    .corazon-flotante {
+      position: absolute;
+      color: var(--accent-color);
+      pointer-events: none;
+      font-size: 20px;
+      animation: flotar 3s linear forwards;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Contenedor principal utilizando tu clase modificada -->
+  <div class="Para_ti">
+    <div class="corazon-principal">❤️</div>
+    <div>
+      <h1>Para la persona más especial</h1>
+      <p>Cada día que pasa me doy cuenta de lo mucho que significas para mí. Esta pequeña página web es solo un detalle para recordarte cuánto te amo.</p>
+    </div>
+    <button class="boton-amor" onclick="crearCorazones()">¡Haz clic aquí!</button>
+  </div>
+
+  <script>
+    // Función interactiva para lanzar corazones de fondo
+    function crearCorazones() {
+      for(let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const corazon = document.createElement('div');
+          corazon.classList.add('corazon-flotante');
+          corazon.innerText = '❤️';
+          
+          // Posición horizontal aleatoria
+          corazon.style.left = Math.random() * 100 + 'vw';
+          // Tamaño aleatorio
+          corazon.style.fontSize = Math.random() * 20 + 10 + 'px';
+          // Duración de la animación aleatoria
+          corazon.style.animationDuration = Math.random() * 2 + 2 + 's';
+          
+          document.body.appendChild(corazon);
+          
+          // Eliminar el elemento después de que termine la animación
+          setTimeout(() => {
+            corazon.remove();
+          }, 4000);
+        }, i * 100);
+      }
+    }
+  </script>
+
+</body>
+</html>
