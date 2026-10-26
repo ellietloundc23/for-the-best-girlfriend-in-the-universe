@@ -7,7 +7,7 @@
     <title>Para la mejor novia del universo ✨</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -23,9 +23,8 @@
                         handwritten: ['Caveat', 'cursive'],
                     },
                     colors: {
-                        darkDeep: '#0f0c29',
-                        darkPurple: '#302b63',
-                        darkBlue: '#24243e',
+                        darkDeep: '#0b081e',
+                        darkPurple: '#1d173d',
                         neonPink: '#ff2a85',
                         neonPurple: '#a855f7',
                         goldGlow: '#f59e0b',
@@ -44,11 +43,11 @@
             }
         }
     </script>
-    
+
     <style>
-        /* Modern Gradient Background */
+        /* Base Background Aesthetic */
         body {
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            background: linear-gradient(135deg, #090617 0%, #171033 50%, #0d122b 100%);
             background-attachment: fixed;
             color: #f1f5f9;
             font-family: 'Poppins', sans-serif;
@@ -56,20 +55,20 @@
             min-height: 100vh;
         }
 
-        /* Glassmorphism Styling */
+        /* Glassmorphism Classes */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .glass-card {
-            background: rgba(30, 20, 60, 0.5);
+            background: rgba(30, 20, 60, 0.45);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -79,31 +78,38 @@
             box-shadow: 0 12px 30px -10px rgba(255, 42, 133, 0.3);
         }
 
-        /* Ambient Floating Particles */
-        .particle {
+        /* Nav Active Tab Highlight */
+        .nav-tab-active {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4) !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        /* Floating Stars Particle Animation */
+        .star-particle {
             position: fixed;
             pointer-events: none;
             z-index: 0;
-            user-select: none;
-            animation: floatUp linear infinite;
+            border-radius: 50%;
+            animation: floatParticle 8s linear infinite;
         }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(105vh) scale(0.3) rotate(0deg);
-                opacity: 0;
-            }
-            15% { opacity: 0.6; }
-            85% { opacity: 0.6; }
-            100% {
-                transform: translateY(-10vh) scale(1) rotate(360deg);
-                opacity: 0;
-            }
+        @keyframes floatParticle {
+            0% { transform: translateY(105vh) scale(0.3); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f0c29; }
+        /* Envelope Open Effect */
+        .envelope-card {
+            perspective: 1000px;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #090617; }
         ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #ff2a85; }
 
@@ -111,242 +117,209 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="relative pb-20 selection:bg-pink-500 selection:text-white">
+<body class="relative pb-16 selection:bg-pink-500 selection:text-white">
 
-    <!-- Ambient Particles Container -->
-    <div id="particle-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+    <!-- Ambient Floating Particles Background -->
+    <div id="particle-bg" class="fixed inset-0 pointer-events-none z-0"></div>
 
-    <!-- ENCABEZADO Y CONTADOR EN TIEMPO REAL -->
-    <header class="relative z-10 pt-8 pb-6 px-4 text-center max-w-5xl mx-auto">
-        
-        <!-- Badge de Aniversario -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-pink-500/30 text-pink-300 text-xs font-semibold tracking-wider uppercase mb-4 animate-float-gentle">
+    <!-- MAIN HEADER WITH REAL-TIME TIMER -->
+    <header class="relative z-10 pt-8 pb-4 px-4 text-center max-w-5xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-pink-500/30 text-pink-300 text-xs font-semibold tracking-wider uppercase mb-3 animate-float-gentle">
             <i class="fa-solid fa-sparkles text-amber-400"></i>
-            <span>Nuestra Historia Especial</span>
+            <span>Nuestra Historia de Amor</span>
             <i class="fa-solid fa-heart text-rose-500"></i>
         </div>
 
-        <!-- Título Principal -->
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200 tracking-tight font-serif mb-4">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200 tracking-tight font-serif mb-3">
             Para la mejor novia del universo ✨
         </h1>
         <p class="text-xs md:text-sm text-purple-200/80 max-w-xl mx-auto font-light leading-relaxed mb-6">
-            Un rincón digital diseñado con todo mi amor para guardar nuestros poemas, momentos inolvidables y detalles mágicos.
+            Un espacio creado con todo mi corazón para celebrar nuestros momentos, promesas, cartas y secretos.
         </p>
 
-        <!-- Widget Contador de Tiempo en Vivo -->
-        <div class="glass-panel max-w-2xl mx-auto rounded-3xl p-5 md:p-6 border border-pink-500/30 shadow-[0_0_30px_rgba(255,42,133,0.15)]">
-            <span class="text-[11px] uppercase font-bold tracking-widest text-amber-300/90 block mb-3 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-clock-rotate-left"></i> Tiempo Juntos Construyendo Recuerdos
+        <!-- Real-Time Duration Clock Counter -->
+        <div class="glass-panel max-w-2xl mx-auto rounded-3xl p-4 md:p-5 border border-pink-500/30 shadow-[0_0_30px_rgba(255,42,133,0.15)]">
+            <span class="text-[11px] uppercase font-bold tracking-widest text-amber-300/90 block mb-2 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left text-xs"></i> Tiempo Juntos Escribiendo Esta Historia
             </span>
             <div class="grid grid-cols-4 gap-2 md:gap-4">
-                <div class="bg-purple-950/40 p-3 rounded-2xl border border-pink-500/20">
-                    <span id="counter-days" class="block text-2xl md:text-4xl font-black text-pink-400">00</span>
-                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Días</span>
+                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-pink-500/20">
+                    <span id="counter-days" class="block text-xl md:text-3xl font-black text-pink-400">00</span>
+                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Días</span>
                 </div>
-                <div class="bg-purple-950/40 p-3 rounded-2xl border border-purple-500/20">
-                    <span id="counter-hours" class="block text-2xl md:text-4xl font-black text-purple-300">00</span>
-                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Horas</span>
+                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-purple-500/20">
+                    <span id="counter-hours" class="block text-xl md:text-3xl font-black text-purple-300">00</span>
+                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Horas</span>
                 </div>
-                <div class="bg-purple-950/40 p-3 rounded-2xl border border-amber-500/20">
-                    <span id="counter-minutes" class="block text-2xl md:text-4xl font-black text-amber-300">00</span>
-                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Minutos</span>
+                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-amber-500/20">
+                    <span id="counter-minutes" class="block text-xl md:text-3xl font-black text-amber-300">00</span>
+                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Minutos</span>
                 </div>
-                <div class="bg-purple-950/40 p-3 rounded-2xl border border-pink-400/20">
-                    <span id="counter-seconds" class="block text-2xl md:text-4xl font-black text-rose-400 animate-pulse">00</span>
-                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Segundos</span>
+                <div class="bg-purple-950/40 p-2.5 md:p-3 rounded-2xl border border-pink-400/20">
+                    <span id="counter-seconds" class="block text-xl md:text-3xl font-black text-rose-400 animate-pulse">00</span>
+                    <span class="text-[9px] md:text-xs font-semibold uppercase text-purple-300">Segundos</span>
                 </div>
             </div>
-            <p class="text-[11px] text-purple-300/60 mt-3 italic">
-                Desde el 26 de Septiembre de 2026 ❤️
+            <p class="text-[10px] text-purple-300/60 mt-2 italic">
+                Oficialmente juntos desde el 26 de Septiembre de 2026 ❤️
             </p>
         </div>
     </header>
 
-    <!-- NAVEGACIÓN PRINCIPAL POR PESTAÑAS (CATEGORÍAS) -->
-    <nav class="sticky top-4 z-30 max-w-4xl mx-auto px-4 my-6">
+    <!-- NAVIGATION MENU SWITCHER -->
+    <nav class="sticky top-3 z-40 max-w-4xl mx-auto px-4 my-6">
         <div class="glass-panel p-1.5 rounded-2xl border border-purple-500/30 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar shadow-2xl">
             
-            <button id="tab-btn-poems" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg">
-                <i class="fa-solid fa-book-open"></i>
-                <span>📖 Poemario & Cartas</span>
+            <button onclick="switchTab('tab-history', this)" class="nav-tab-btn nav-tab-active flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-timeline text-amber-300"></i>
+                <span>Nuestra Historia</span>
             </button>
 
-            <button id="tab-btn-secrets" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-vault"></i>
-                <span>🔒 Secretos</span>
+            <button onclick="switchTab('tab-letters', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-envelope-open-text text-pink-400"></i>
+                <span>Cartas Secretas</span>
             </button>
 
-            <button id="tab-btn-gacha" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-dice"></i>
-                <span>🎰 Gacha RNG</span>
+            <button onclick="switchTab('tab-coupons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-ticket text-rose-400"></i>
+                <span>Vales & Promesas</span>
             </button>
 
-            <button id="tab-btn-coupons" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-ticket"></i>
-                <span>🎟️ Cupones</span>
+            <button onclick="switchTab('tab-music', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-music text-purple-400"></i>
+                <span>Playlist & Música</span>
+            </button>
+
+            <button onclick="switchTab('tab-reasons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
+                <i class="fa-solid fa-star text-yellow-300"></i>
+                <span>Razones Únicas</span>
             </button>
 
         </div>
     </nav>
 
-    <!-- CONTENEDOR PRINCIPAL DE PÁGINAS -->
-    <main class="relative z-10 max-w-5xl mx-auto px-4 pt-2">
+    <!-- VIEWPORT MAIN CONTAINER -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4">
 
-        <!-- ========================================== -->
-        <!-- SECCIÓN 1: POEMARIO Y CARTAS DE AMOR -->
-        <!-- ========================================== -->
-        <section id="sec-poems" class="tab-content block space-y-6">
-            <div class="text-center max-w-xl mx-auto mb-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Colección de Versos</span>
-                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Nuestra Galería de Cartas</h2>
-                <p class="text-xs text-purple-200/70 mt-1">Selecciona cualquier tarjeta para desplegar el escrito completo.</p>
+        <!-- ============================================================ -->
+        <!-- TAB 1: NUESTRA HISTORIA (INTERACTIVE TIMELINE & MILESTONES) -->
+        <!-- ============================================================ -->
+        <section id="tab-history" class="tab-view block space-y-6 animate-fadeIn">
+            <div class="text-center max-w-lg mx-auto mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">Línea del Tiempo</span>
+                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Capítulos de Nuestra Historia</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Haz clic en cada momento para desplegar los detalles completos y recuerdos.</p>
             </div>
 
-            <!-- Grid de Cartas / Poemas -->
-            <div id="poems-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Se llena dinámicamente mediante JS -->
-            </div>
-        </section>
+            <!-- Vertical Timeline Container -->
+            <div class="relative border-l-2 border-pink-500/30 ml-4 md:ml-32 space-y-8 pb-4">
 
-        <!-- ========================================== -->
-        <!-- SECCIÓN 2: VAULT DE SECRETOS -->
-        <!-- ========================================== -->
-        <section id="sec-secrets" class="tab-content hidden space-y-6">
-            <div class="text-center max-w-xl mx-auto mb-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">Acceso Reservado</span>
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Bóveda de Recuerdos & Confesiones</h2>
-                <p class="text-xs text-purple-200/70 mt-1">Toca cada sello protegido para revelar pensamientos y detalles especiales sobre ti.</p>
-            </div>
-
-            <!-- Grid de Secretos -->
-            <div id="secrets-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <!-- Se llena dinámicamente mediante JS -->
-            </div>
-        </section>
-
-        <!-- ========================================== -->
-        <!-- SECCIÓN 3: GACHA DE RECUERDOS Y PREMIOS (RNG) -->
-        <!-- ========================================== -->
-        <section id="sec-gacha" class="tab-content hidden space-y-6">
-            <div class="glass-panel max-w-2xl mx-auto rounded-3xl p-6 md:p-10 text-center relative overflow-hidden border border-amber-500/30 shadow-[0_0_40px_rgba(245,158,11,0.15)]">
-                
-                <span class="text-xs font-black uppercase tracking-widest text-amber-300 bg-amber-950/80 px-4 py-1.5 rounded-full border border-amber-500/40 inline-block mb-3">
-                    ✨ Máquina de Recuerdos
-                </span>
-                
-                <h2 class="text-2xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-300 to-purple-200 mb-2">
-                    Gacha de Amor RNG
-                </h2>
-                <p class="text-xs md:text-sm text-purple-200/80 max-w-md mx-auto mb-6">
-                    Presiona el botón para tirar la suerte y descubrir recuerdos, detalles o premios clasificados por rareza.
-                </p>
-
-                <!-- Botón de Acción Principal -->
-                <button id="gacha-spin-btn" class="w-full max-w-sm mx-auto py-4 px-6 rounded-2xl font-black text-sm md:text-base text-slate-950 bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-300 hover:from-yellow-300 hover:to-amber-400 transition-all duration-300 transform active:scale-95 shadow-[0_0_30px_rgba(245,158,11,0.4)] border border-amber-200 flex items-center justify-center gap-3 mb-6">
-                    <i class="fa-solid fa-sparkles text-lg"></i>
-                    <span>✨ TIRAR RNG / ABRIR PREMIO ✨</span>
-                    <i class="fa-solid fa-gift text-lg"></i>
-                </button>
-
-                <!-- Área de Visualización del Premio -->
-                <div id="gacha-result-card" class="glass-card p-6 rounded-2xl border border-dashed border-amber-400/40 min-h-[160px] flex flex-col items-center justify-center transition-all">
-                    <p id="gacha-placeholder" class="text-xs md:text-sm text-purple-200/70 italic">
-                        El cofre está listo. ¡Haz clic arriba para abrir un nuevo recuerdo! 🎁
-                    </p>
-                    <div id="gacha-active-content" class="hidden space-y-3">
-                        <span id="gacha-badge" class="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full inline-block"></span>
-                        <h3 id="gacha-title" class="text-xl font-bold text-white"></h3>
-                        <p id="gacha-desc" class="text-xs md:text-sm text-purple-100 font-light leading-relaxed max-w-md mx-auto"></p>
+                <!-- Milestone Item 1 -->
+                <div class="relative pl-6 md:pl-8 group">
+                    <!-- Point Indicator -->
+                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-pink-500 border-4 border-darkDeep shadow-[0_0_12px_#ff2a85] group-hover:scale-125 transition-transform"></div>
+                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-purple-950/80 px-2.5 py-1 rounded-md border border-amber-500/30">Hito #1 • El Inicio</span>
+                    
+                    <div class="glass-card rounded-2xl p-5 mt-2 border border-purple-500/20">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-white font-serif">El Primer Mensaje & La Conexión</h3>
+                            <button onclick="toggleFavorite(this)" class="text-purple-400 hover:text-rose-500 transition-colors p-1" title="Guardar en favoritos">
+                                <i class="fa-regular fa-heart text-base"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-purple-200/80 leading-relaxed mb-3">
+                            Aquel primer día en que empezamos a hablar sin sospechar todo lo hermoso que estaba a punto de nacer. Lo que comenzó como una conversación más se convirtió rápidamente en mi momento favorito del día.
+                        </p>
+                        <div class="bg-purple-950/50 p-3 rounded-xl border border-dashed border-purple-500/30 text-[11px] text-pink-200/90 italic font-serif">
+                            <i class="fa-solid fa-quote-left text-pink-400 mr-1"></i> "Desde el primer saludo sentí algo totalmente diferente en ti."
+                        </div>
                     </div>
                 </div>
 
-                <!-- Contador de Colección -->
-                <div class="mt-6 flex items-center justify-between px-4 text-xs text-purple-300/80 border-t border-purple-800/40 pt-4">
-                    <span>Colección de Recuerdos Descubiertos:</span>
-                    <span id="gacha-counter-badge" class="font-bold text-amber-300 font-mono bg-purple-950/60 px-3 py-1 rounded-full border border-amber-500/30">0 / 8</span>
+                <!-- Milestone Item 2 -->
+                <div class="relative pl-6 md:pl-8 group">
+                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-purple-500 border-4 border-darkDeep shadow-[0_0_12px_#a855f7] group-hover:scale-125 transition-transform"></div>
+                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-purple-950/80 px-2.5 py-1 rounded-md border border-amber-500/30">Hito #2 • Primera Cita</span>
+                    
+                    <div class="glass-card rounded-2xl p-5 mt-2 border border-purple-500/20">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-white font-serif">Nuestra Primera Salida Juntos</h3>
+                            <button onclick="toggleFavorite(this)" class="text-purple-400 hover:text-rose-500 transition-colors p-1" title="Guardar en favoritos">
+                                <i class="fa-regular fa-heart text-base"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-purple-200/80 leading-relaxed mb-3">
+                            Verte frente a mí, tu sonrisa en persona y la risa contagiosa que compartimos. Ese día comprendí que estar a tu lado siempre se sentía como estar en casa.
+                        </p>
+                        <div class="flex gap-2 flex-wrap text-[10px]">
+                            <span class="px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30">✨ Sonrisas Inolvidables</span>
+                            <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">☕ Charla de Horas</span>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Milestone Item 3 (Official Date) -->
+                <div class="relative pl-6 md:pl-8 group">
+                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-amber-400 border-4 border-darkDeep shadow-[0_0_15px_#f59e0b] group-hover:scale-125 transition-transform"></div>
+                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-amber-950/80 px-2.5 py-1 rounded-md border border-amber-500/40">26 de Septiembre de 2026 • El Gran Día</span>
+                    
+                    <div class="glass-card rounded-2xl p-5 mt-2 border-2 border-amber-500/40 bg-gradient-to-br from-purple-900/40 to-pink-950/30">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <h3 class="text-xl font-bold text-amber-200 font-serif">¡Nos Volvimos Novios! ❤️</h3>
+                            <button onclick="toggleFavorite(this)" class="text-rose-500 p-1" title="Favorito">
+                                <i class="fa-solid fa-heart text-base"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-purple-100 leading-relaxed mb-3">
+                            El momento oficial en que nuestras vidas se unieron de forma especial. Decirte lo que sentía y escuchar tu respuesta es uno de los mejores recuerdos de toda mi vida.
+                        </p>
+                        <div class="bg-amber-950/60 p-3 rounded-xl border border-amber-500/40 text-[11px] text-amber-200 italic font-serif">
+                            "El comienzo de nuestra mejor aventura juntos."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone Item 4 -->
+                <div class="relative pl-6 md:pl-8 group">
+                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-500 border-4 border-darkDeep shadow-[0_0_12px_#f43f5e] group-hover:scale-125 transition-transform"></div>
+                    <span class="text-[10px] md:text-xs font-bold font-mono text-amber-300 bg-purple-950/80 px-2.5 py-1 rounded-md border border-amber-500/30">El Presente y El Futuro</span>
+                    
+                    <div class="glass-card rounded-2xl p-5 mt-2 border border-purple-500/20">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-white font-serif">Todos los Días Que Faltan por Construir</h3>
+                            <button onclick="toggleFavorite(this)" class="text-purple-400 hover:text-rose-500 transition-colors p-1">
+                                <i class="fa-regular fa-heart text-base"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-purple-200/80 leading-relaxed">
+                            Esto es solo el comienzo. Faltan miles de viajes, risas, tardes tranquilas y momentos inolvidables por escribir juntos.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- SECCIÓN 4: CUPONES DE AMOR -->
-        <!-- ========================================== -->
-        <section id="sec-coupons" class="tab-content hidden space-y-6">
-            <div class="text-center max-w-xl mx-auto mb-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Pases Especiales</span>
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Vales & Cupones de Amor</h2>
-                <p class="text-xs text-purple-200/70 mt-1">Canjea cualquiera de estos vales especiales cuando lo desees.</p>
+        <!-- ============================================================ -->
+        <!-- TAB 2: CARTAS Y POEMAS SECRETOS (INTERACTIVE VAULT) -->
+        <!-- ============================================================ -->
+        <section id="tab-letters" class="tab-view hidden space-y-6 animate-fadeIn">
+            <div class="text-center max-w-lg mx-auto mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Bóveda Privada</span>
+                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Cartas Secretas & Escritos</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Selecciona cualquier sobre para desplegar la lectura romántica completa.</p>
             </div>
 
-            <!-- Grid de Cupones -->
-            <div id="coupons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Se llena dinámicamente mediante JS -->
-            </div>
-        </section>
+            <!-- Envelope Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    </main>
-
-    <!-- ========================================== -->
-    <!-- MODALES DE LECTURA Y DETALLE -->
-    <!-- ========================================== -->
-
-    <!-- Modal 1: Lectura Completa de Poema -->
-    <div id="modal-poem" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
-        <div class="glass-panel max-w-lg w-full rounded-3xl p-6 md:p-8 text-center relative border border-pink-500/40 shadow-[0_0_50px_rgba(255,42,133,0.3)] max-h-[85vh] flex flex-col">
-            <button id="close-modal-poem" class="absolute top-4 right-4 text-purple-300 hover:text-pink-400 text-lg w-8 h-8 rounded-full bg-purple-950/60 flex items-center justify-center transition-all">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-400 flex items-center justify-center mx-auto mb-3 text-pink-400 text-xl shadow-lg">
-                <i id="poem-modal-icon" class="fa-solid fa-feather-pointed"></i>
-            </div>
-
-            <span id="poem-modal-tag" class="text-[10px] uppercase font-bold tracking-widest text-pink-300 bg-pink-950/60 px-3 py-0.5 rounded-full inline-block mx-auto mb-2">Poema Especial</span>
-            <h3 id="poem-modal-title" class="text-2xl font-bold text-white mb-4 font-serif">Título</h3>
-
-            <div class="bg-purple-950/50 p-5 rounded-2xl border border-purple-500/30 overflow-y-auto mb-4 text-left">
-                <p id="poem-modal-body" class="font-serif text-sm md:text-base text-pink-100 leading-relaxed italic whitespace-pre-line">
-                    Contenido del poema...
-                </p>
-            </div>
-
-            <button id="btn-close-poem-bottom" class="w-full py-2.5 rounded-xl font-bold text-xs uppercase bg-gradient-to-r from-pink-600 to-purple-600 text-white hover:opacity-90 transition-all">
-                Cerrar Lectura ❤️
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal 2: Secreto Revelado -->
-    <div id="modal-secret" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
-        <div class="glass-panel max-w-md w-full rounded-3xl p-6 md:p-8 text-center relative border border-amber-500/40 shadow-[0_0_50px_rgba(245,158,11,0.25)]">
-            <button id="close-modal-secret" class="absolute top-4 right-4 text-purple-300 hover:text-amber-400 text-lg w-8 h-8 rounded-full bg-purple-950/60 flex items-center justify-center transition-all">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="w-14 h-14 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center mx-auto mb-3 text-amber-300 text-2xl shadow-lg">
-                <i id="secret-modal-icon" class="fa-solid fa-key"></i>
-            </div>
-
-            <span class="text-[10px] uppercase font-bold tracking-widest text-amber-300 bg-amber-950/80 px-3 py-1 rounded-full inline-block mb-2">
-                🔓 Confesión Revelada
-            </span>
-            <h3 id="secret-modal-title" class="text-xl font-bold text-white mb-3">Título del Secreto</h3>
-
-            <div class="bg-purple-950/60 p-4 rounded-2xl border border-dashed border-amber-500/40 mb-5 text-left">
-                <p id="secret-modal-body" class="text-xs md:text-sm text-purple-100 leading-relaxed font-sans">
-                    Contenido del secreto...
-                </p>
-            </div>
-
-            <button id="btn-close-secret-bottom" class="w-full py-2.5 rounded-xl font-bold text-xs uppercase bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 hover:opacity-90 transition-all">
-                Guardar en mi Memoria ❤️
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal 3: Ticket Confirmación de Cupón -->
-    <div id="modal-ticket" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
-        <div class="glass-panel max-w-md w-full rounded-3xl p-6 text-center relative border border-pink-500/50 shadow-[0_0_50px_rgba(255,42,133,0.3)]">
-            <button id="close-modal-ticket" class="absolute top-4 right-4 text-purple-300 hover:text-pink-400 text-lg">
-                <i class=
+                <!-- Envelope 1 -->
+                <div class="glass-card rounded-3xl p-6 relative overflow-hidden border border-pink-500/30 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[9px] font-bold uppercase tracking-widest text-pink-300 bg-pink-950/80 px-2.5 py-0.5 rounded-full border border-pink-500/40">Carta #1 • Para Cuando Me Extrañes</span>
+                            <i class="fa-solid fa-envelope text-pink-400 text-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white font-serif mb-2">Un Abrazito Digital</h3>
+                        <p class="text-xs text-purple-200/70 italic leading-relaxed mb-4">
+                            "Si estás leyendo
