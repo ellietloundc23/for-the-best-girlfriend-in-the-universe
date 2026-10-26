@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Mes, Mi Amor ❤️</title>
+  <title>Nuestra Historia - Feliz 26 ❤️</title>
   <style>
     :root {
-      --bg-color: #fdf0f4;
-      --letter: #ffffff;
-      --text-color: #d63031;
+      --bg-color: #fcefeff5;
+      --card-bg: #ffffff;
+      --text-main: #2d3436;
+      --heart-color: #d63031;
       --accent-color: #ff7675;
       --gold: #fdcb6e;
     }
@@ -24,246 +25,326 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: flex-start; /* Permite scroll si el contenido es largo */
-      overflow-x: hidden;
-      position: relative;
-      padding: 40px 20px;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
 
-    /* Contenedor principal extendido */
-    .Para_ti {
-      position: relative;
+    /* Menú de Navegación */
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
       width: 100%;
       max-width: 600px;
-      background: var(--letter);
-      padding: 40px 30px;
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(214, 48, 49, 0.12);
-      text-align: center;
-      border: 2px solid var(--gold);
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
+      overflow-x: auto;
+      padding: 5px;
     }
 
-    .corazon-principal {
-      font-size: 3.5rem;
-      animation: latido 1.2s infinite;
-      margin-bottom: -10px;
-    }
-
-    h1 {
-      color: var(--text-color);
-      font-size: 2rem;
-      margin-bottom: 5px;
-    }
-
-    .subtitulo {
-      color: #7f8c8d;
-      font-size: 1rem;
-      font-style: italic;
-    }
-
-    /* Sección del Contador de Meses */
-    .contador-box {
-      background-color: #fff5f7;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px dashed var(--accent-color);
-    }
-
-    .contador-titulo {
-      font-size: 0.9rem;
-      color: #636e72;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-
-    .contador-numero {
-      font-size: 2.2rem;
+    .tab-btn {
+      background: var(--card-bg);
+      border: 2px solid transparent;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
       font-weight: bold;
-      color: var(--text-color);
+      color: var(--text-main);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    /* Mensaje Principal */
-    .carta-texto {
-      color: #2d3436;
-      line-height: 1.8;
-      font-size: 1.1rem;
+    .tab-btn.active {
+      background: var(--heart-color);
+      color: white;
+      border-color: var(--gold);
+    }
+
+    /* Contenedor de Secciones */
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(214, 48, 49, 0.1);
+      border: 2px solid var(--gold);
+      min-height: 400px;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Estilos Generales de Contenido */
+    h1, h2 {
+      color: var(--heart-color);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    p {
+      color: var(--text-main);
+      line-height: 1.7;
+      margin-bottom: 15px;
       text-align: justify;
     }
 
-    /* Línea de tiempo o Razones por las que te amo */
-    .detalles-amor {
-      text-align: left;
-      background: #fdf8f9;
-      padding: 20px;
-      border-radius: 16px;
+    /* SECCIÓN 1: Inicio / Contador */
+    .latido-box {
+      font-size: 4rem;
+      text-align: center;
+      animation: latir 1.2s infinite;
+      margin: 20px 0;
     }
 
-    .detalles-amor h3 {
-      color: var(--text-color);
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-      border-bottom: 2px solid #f8d7da;
-      padding-bottom: 5px;
-    }
-
-    .item-amor {
-      margin-bottom: 12px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      color: #4a4a4a;
-    }
-
-    .item-amor span {
-      color: var(--accent-color);
-    }
-
-    /* Botón Interactivo */
-    .boton-amor {
-      background-color: var(--text-color);
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(214, 48, 49, 0.3);
-      align-self: center;
-    }
-
-    .boton-amor:hover {
-      background-color: var(--accent-color);
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(214, 48, 49, 0.4);
-    }
-
-    /* Animaciones */
-    @keyframes latido {
+    @keyframes latir {
       0%, 100% { transform: scale(1); }
       20% { transform: scale(1.1); }
       40% { transform: scale(1.05); }
       60% { transform: scale(1.15); }
     }
 
-    .corazon-flotante {
-      position: absolute;
-      color: var(--accent-color);
-      pointer-events: none;
-      animation: flotar 3s linear forwards;
-      z-index: 100;
+    .timer-card {
+      background: #fff5f7;
+      border: 1px dashed var(--accent-color);
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 20px;
     }
 
-    @keyframes flotar {
-      0% {
-        transform: translateY(100vh) scale(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1.5) rotate(360deg);
-        opacity: 0;
-      }
+    .timer-display {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--heart-color);
+      margin-top: 10px;
+    }
+
+    /* SECCIÓN 2: Razones */
+    .lista-razones {
+      list-style: none;
+    }
+
+    .lista-razones li {
+      background: #fdf8f9;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      border-left: 4px solid var(--accent-color);
+    }
+
+    /* SECCIÓN 3: Minijuego Atrapa Corazones */
+    #game-canvas-container {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      background: #2d3436;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    #basket {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      width: 60px;
+      height: 20px;
+      background: var(--gold);
+      border-radius: 10px;
+      transform: translateX(-50%);
+      transition: left 0.1s ease-out;
+    }
+
+    .falling-heart {
+      position: absolute;
+      font-size: 24px;
+      user-select: none;
+    }
+
+    .game-ui {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .btn-play {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: var(--heart-color);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* SECCIÓN 4: Mensaje Final */
+    .carta-pergamino {
+      background: #fdfbf7;
+      border: 1px solid #e0d0b0;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
     }
   </style>
 </head>
 <body>
 
-  <div class="Para_ti">
-    <div class="corazon-principal">❤️</div>
-    
-    <div>
-      <h1>¡Feliz 26, Mi Amor!</h1>
-      <p class="subtitulo">Cada mes a tu lado es mi regalo favorito</p>
+  <!-- Pestañas de Navegación -->
+  <nav>
+    <button class="tab-btn active" onclick="switchTab('inicio')">🏠 Inicio</button>
+    <button class="tab-btn" onclick="switchTab('razones')">✨ Detalles</button>
+    <button class="tab-btn" onclick="switchTab('juego')">🎮 Minijuego</button>
+    <button class="tab-btn" onclick="switchTab('carta')">💌 Mi Carta</button>
+  </nav>
+
+  <!-- Contenedor Único Dinámico -->
+  <div class="container">
+
+    <!-- SECCIÓN 1: INICIO -->
+    <div id="inicio" class="section active">
+      <h1>¡Feliz 26!</h1>
+      <div class="latido-box">❤️</div>
+      <p>Bienvenida a tu espacio especial. He preparado este rincón digital interactivo exclusivamente para ti, para celebrar un mes más juntos y recordarte lo importante que eres en mi vida.</p>
+      
+      <div class="timer-card">
+        <div id="timer-title">⏳ Tiempo restante para nuestro próximo 26:</div>
+        <div class="timer-display" id="countdown">Calculando...</div>
+      </div>
     </div>
 
-    <!-- Caja del Contador Dinámico -->
-    <div class="contador-box">
-      <p class="contador-titulo">⏳ Próximo mes en...</p>
-      <div class="contador-numero" id="cuenta-atras">Cargando...</div>
+    <!-- SECCIÓN 2: RAZONES -->
+    <div id="razones" class="section">
+      <h2>Lo que me enamora de ti</h2>
+      <p>Si tuviera que hacer una lista infinita jamás terminaría, pero aquí tienes tres pequeños recordatorios de por qué alegres mis días:</p>
+      <ul class="lista-razones">
+        <li>💝 <strong>Tu apoyo:</strong> Cómo estás ahí impulsándome y creyendo en mí siempre.</li>
+        <li>🌟 <strong>Tu luz:</strong> Cambias por completo mi humor con solo un mensaje de texto.</li>
+        <li>🪐 <strong>Tu mundo:</strong> Adoro la forma en la que vemos y planeamos el futuro juntos.</li>
+      </ul>
     </div>
 
-    <!-- Mensaje Largo -->
-    <div class="carta-texto">
-      <p>Hoy es 26, un día increíblemente especial porque me recuerda el momento en el que decidimos empezar a escribir esta historia juntos. No me canso de agradecer la suerte que tengo de tenerte en mi vida, de compartir risas, abrazos y hasta los días más simples, convirtiéndolos en momentos perfectos.</p>
-      <br>
-      <p>Gracias por tu paciencia, por tu apoyo incondicional y por quererme de la forma en que lo haces. Eres mi lugar seguro y mi persona favorita en todo el mundo entero. ¡Feliz cumple mes!</p>
+    <!-- SECCIÓN 3: MINIJUEGO -->
+    <div id="juego" class="section">
+      <h2>Atrapa mi Amor</h2>
+      <p style="text-align: center; font-size: 0.9rem;">Mueve el mouse dentro del recuadro o desliza el dedo en tu pantalla para atrapar los corazones.</p>
+      <div class="game-ui">
+        <div>Puntos: <span id="score">0</span></div>
+        <div>Vidas: <span id="lives">3</span></div>
+      </div>
+      <div id="game-canvas-container">
+        <div id="basket">📥</div>
+      </div>
+      <button class="btn-play" id="start-btn" onclick="startGame()">Iniciar Juego</button>
     </div>
 
-    <!-- Lista Detallada -->
-    <div class="detalles-amor">
-      <h3>Tres cosas que me encantan de ti:</h3>
-      <div class="item-amor"><span>✨</span> Tu sonrisa y cómo eres capaz de iluminar mi día por completo en un segundo.</div>
-      <div class="item-amor"><span>✨</span> La forma tan bonita en la que me cuidas y me haces sentir especial siempre.</div>
-      <div class="item-amor"><span>✨</span> Absolutamente todos los momentos, metas y sueños que estamos construyendo juntos.</div>
+    <!-- SECCIÓN 4: CARTA -->
+    <div id="carta" class="section">
+      <h2>Unas palabras para ti</h2>
+      <div class="carta-pergamino">
+        <p>Hoy que es 26 quiero tomarme el tiempo de escribirte esto desde el corazón. Gracias por cada sonrisa compartida, por los momentos divertidos y por la complicidad que crece día con día.</p>
+        <p>Me encanta ver cómo avanzamos y lo bonito que es construir esta relación a tu lado. Eres mi persona favorita y este día siempre será una fiesta en mi calendario.</p>
+        <p style="text-align: right; font-weight: bold; color: var(--heart-color); margin-top: 20px;">¡Te amo muchísimo! 🌹</p>
+      </div>
     </div>
 
-    <!-- Botón de Sorpresa -->
-    <button class="boton-amor" onclick="crearCorazones()">¡Presiona para una sorpresa!</button>
   </div>
 
   <script>
-    // LÓGICA DEL CONTADOR DINÁMICO (Hacia el próximo día 26)
-    function actualizarContador() {
-      const ahora = new Date();
-      let añoObjetivo = ahora.getFullYear();
-      let mesObjetivo = ahora.getMonth();
+    // SISTEMA DE PESTAÑAS (TABS)
+    function switchTab(tabId) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       
-      // Si hoy ya pasamos del día 26, apuntamos al 26 del próximo mes
-      if (ahora.getDate() >= 26) {
-        mesObjetivo++;
-        if (mesObjetivo > 11) {
-          mesObjetivo = 0;
-          añoObjetivo++;
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+
+      if(tabId !== 'juego') { endGame(); }
+    }
+
+    // CONTADOR DINÁMICO
+    function updateCountdown() {
+      const now = new Date();
+      let targetYear = now.getFullYear();
+      let targetMonth = now.getMonth();
+
+      if (now.getDate() >= 26) {
+        targetMonth++;
+        if (targetMonth > 11) {
+          targetMonth = 0;
+          targetYear++;
         }
       }
-      
-      const fechaObjetivo = new Date(añoObjetivo, mesObjetivo, 26, 0, 0, 0);
-      const diferencia = fechaObjetivo - ahora;
 
-      // Si es exactamente el día 26
-      if (ahora.getDate() === 26) {
-        document.getElementById('cuenta-atras').innerHTML = "¡HOY ES NUESTRO DÍA! 🎉❤️";
+      const targetDate = new Date(targetYear, targetMonth, 26, 0, 0, 0);
+      const diff = targetDate - now;
+
+      if (now.getDate() === 26) {
+        document.getElementById('timer-title').innerText = "🎉 ¡Felicidades! 🎉";
+        document.getElementById('countdown').innerText = "¡HOY ES NUESTRO DÍA! 💕";
         return;
       }
 
-      // Cálculo de tiempo restante
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-      document.getElementById('cuenta-atras').innerHTML = `${dias}d ${horas}h ${minutos}m`;
+      document.getElementById('countdown').innerText = `${days}d ${hours}h ${minutes}m`;
     }
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
 
-    // Ejecutar contador inmediatamente y actualizar cada minuto
-    actualizarContador();
-    setInterval(actualizarContador, 60000);
 
-    // LLUVIA DE CORAZONES INTERACTIVA
-    function crearCorazones() {
-      const iconos = ['❤️', '💖', '💝', '💕', '✨'];
-      for(let i = 0; i < 30; i++) {
-        setTimeout(() => {
-          const corazon = document.createElement('div');
-          corazon.classList.add('corazon-flotante');
-          corazon.innerText = iconos[Math.floor(Math.random() * iconos.length)];
-          
-          corazon.style.left = Math.random() * 100 + 'vw';
-          corazon.style.fontSize = Math.random() * 25 + 15 + 'px';
-          corazon.style.animationDuration = Math.random() * 2 + 25 + 's'; // Variedad de velocidades
-          
-          document.body.appendChild(corazon);
-          
-          setTimeout(() => { corazon.remove(); }, 3000);
-        }, i * 80);
-      }
-    }
-  </script>
+    // MOTOR DEL MINIJUEGO ARCADE
+    const container = document.getElementById('game-canvas-container');
+    const basket = document.getElementById('basket');
+    let score = 0;
+    let lives = 3;
+    let gameInterval;
+    let heartSpawnInterval;
+    let isPlaying = false;
 
-</body>
-</html>
+    // Control del mouse / táctil
+    container.addEventListener('mousemove', (e) => {
+      if(!isPlaying) return;
+      const rect = container.getBoundingClientRect();
+      let relX = e.clientX - rect.left;
+      if(relX < 30) relX = 30;
+      if(relX > rect.width - 30) relX = rect.width - 30;
+      basket.style.left = relX + 'px';
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      if(!isPlaying) return;
+      const rect = container.getBoundingClientRect();
+      let relX = e.touches[0].clientX - rect.left;
+      if(relX < 30) relX = 30;
+      if(relX > rect.width - 30) relX = rect.width - 30;
+      basket.style.left = relX + 'px';
+    });
+
+    function startGame() {
+      if(isPlaying) return;
+      isPlaying = true;
+      score = 0;
+      lives = 3;
+      document.getElementById('score').innerText = score;
