@@ -1,44 +1,43 @@
 ```html
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Universo ❤️ - Aniversario</title>
+    <title>Para la mejor novia del universo ✨</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome para iconos -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Poppins y Dancing Script para toques poéticos -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
-                        cursive: ['Dancing Script', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
+                        handwritten: ['Caveat', 'cursive'],
                     },
                     colors: {
-                        neonPink: '#ff007f',
-                        neonPurple: '#9d4edd',
-                        neonCyan: '#00f5d4',
-                        darkBg: '#0b001a',
+                        darkDeep: '#0f0c29',
+                        darkPurple: '#302b63',
+                        darkBlue: '#24243e',
+                        neonPink: '#ff2a85',
+                        neonPurple: '#a855f7',
+                        goldGlow: '#f59e0b',
                     },
                     animation: {
-                        'pulse-glow': 'pulseGlow 2.5s infinite alternate',
-                        'float-slow': 'float 6s ease-in-out infinite',
-                        'spin-slow': 'spin 12s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float-gentle': 'float 4s ease-in-out infinite',
                     },
                     keyframes: {
-                        pulseGlow: {
-                            '0%': { boxShadow: '0 0 15px rgba(255, 0, 127, 0.4), 0 0 30px rgba(157, 78, 221, 0.2)' },
-                            '100%': { boxShadow: '0 0 30px rgba(255, 0, 127, 0.8), 0 0 50px rgba(157, 78, 221, 0.6)' }
-                        },
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-12px)' }
+                            '50%': { transform: 'translateY(-8px)' }
                         }
                     }
                 }
@@ -47,297 +46,307 @@
     </script>
     
     <style>
-        /* Estilos personalizados y Glassmorphism */
+        /* Modern Gradient Background */
         body {
-            background-color: #0b001a;
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(157, 78, 221, 0.25) 0px, transparent 50%),
-                radial-gradient(at 90% 90%, rgba(255, 0, 127, 0.2) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(20, 0, 45, 1) 0px, transparent 100%);
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             background-attachment: fixed;
-            color: #ffffff;
+            color: #f1f5f9;
+            font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Cristal con efecto neón */
+        /* Glassmorphism Styling */
         .glass-panel {
-            background: rgba(20, 5, 38, 0.55);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 0, 127, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        .glass-panel:hover {
-            border-color: rgba(255, 0, 127, 0.4);
+        .glass-card {
+            background: rgba(30, 20, 60, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Partículas / Corazones flotantes */
-        .floating-particle {
+        .glass-card:hover {
+            border-color: rgba(255, 42, 133, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(255, 42, 133, 0.3);
+        }
+
+        /* Ambient Floating Particles */
+        .particle {
             position: fixed;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
             user-select: none;
             animation: floatUp linear infinite;
         }
 
         @keyframes floatUp {
             0% {
-                transform: translateY(100vh) scale(0.5) rotate(0deg);
+                transform: translateY(105vh) scale(0.3) rotate(0deg);
                 opacity: 0;
             }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
             100% {
-                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                transform: translateY(-10vh) scale(1) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Modal / Cartas desplegables con perspectiva */
-        .card-perspective {
-            perspective: 1000px;
-        }
-        
-        .secret-card-inner {
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform-style: preserve-3d;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0c29; }
+        ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff2a85; }
 
-        .secret-card-inner.is-flipped {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-        }
-
-        /* Scrollbar Neón */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0b001a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #9d4edd;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ff007f;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen font-sans pb-16 relative selection:bg-pink-500 selection:text-white">
+<body class="relative pb-20 selection:bg-pink-500 selection:text-white">
 
-    <!-- Lluvia de partículas en el fondo -->
-    <div id="particles-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+    <!-- Ambient Particles Container -->
+    <div id="particle-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
-    <!-- Contenido Principal -->
-    <div class="relative z-10 max-w-4xl mx-auto px-4 pt-8 md:pt-12 flex flex-col items-center">
+    <!-- ENCABEZADO Y CONTADOR EN TIEMPO REAL -->
+    <header class="relative z-10 pt-8 pb-6 px-4 text-center max-w-5xl mx-auto">
+        
+        <!-- Badge de Aniversario -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-pink-500/30 text-pink-300 text-xs font-semibold tracking-wider uppercase mb-4 animate-float-gentle">
+            <i class="fa-solid fa-sparkles text-amber-400"></i>
+            <span>Nuestra Historia Especial</span>
+            <i class="fa-solid fa-heart text-rose-500"></i>
+        </div>
 
-        <!-- HEADER -->
-        <header class="text-center mb-10 animate-float-slow">
-            <div class="inline-block p-2 px-4 rounded-full bg-purple-900/40 border border-purple-500/30 text-pink-300 text-xs md:text-sm font-semibold tracking-widest uppercase mb-3 shadow-[0_0_15px_rgba(157,78,221,0.3)]">
-                ✨ Nuestra Historia Estelar ✨
+        <!-- Título Principal -->
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200 tracking-tight font-serif mb-4">
+            Para la mejor novia del universo ✨
+        </h1>
+        <p class="text-xs md:text-sm text-purple-200/80 max-w-xl mx-auto font-light leading-relaxed mb-6">
+            Un rincón digital diseñado con todo mi amor para guardar nuestros poemas, momentos inolvidables y detalles mágicos.
+        </p>
+
+        <!-- Widget Contador de Tiempo en Vivo -->
+        <div class="glass-panel max-w-2xl mx-auto rounded-3xl p-5 md:p-6 border border-pink-500/30 shadow-[0_0_30px_rgba(255,42,133,0.15)]">
+            <span class="text-[11px] uppercase font-bold tracking-widest text-amber-300/90 block mb-3 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left"></i> Tiempo Juntos Construyendo Recuerdos
+            </span>
+            <div class="grid grid-cols-4 gap-2 md:gap-4">
+                <div class="bg-purple-950/40 p-3 rounded-2xl border border-pink-500/20">
+                    <span id="counter-days" class="block text-2xl md:text-4xl font-black text-pink-400">00</span>
+                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Días</span>
+                </div>
+                <div class="bg-purple-950/40 p-3 rounded-2xl border border-purple-500/20">
+                    <span id="counter-hours" class="block text-2xl md:text-4xl font-black text-purple-300">00</span>
+                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Horas</span>
+                </div>
+                <div class="bg-purple-950/40 p-3 rounded-2xl border border-amber-500/20">
+                    <span id="counter-minutes" class="block text-2xl md:text-4xl font-black text-amber-300">00</span>
+                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Minutos</span>
+                </div>
+                <div class="bg-purple-950/40 p-3 rounded-2xl border border-pink-400/20">
+                    <span id="counter-seconds" class="block text-2xl md:text-4xl font-black text-rose-400 animate-pulse">00</span>
+                    <span class="text-[10px] md:text-xs font-semibold uppercase text-purple-300">Segundos</span>
+                </div>
             </div>
-            <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-300 drop-shadow-[0_0_25px_rgba(255,0,127,0.6)] mb-2">
-                Para La Mejor Novia Del Universo
-            </h1>
-            <p class="text-purple-200/80 text-sm md:text-base max-w-md mx-auto font-light">
-                Cada segundo a tu lado es una constelación de momentos mágicos.
+            <p class="text-[11px] text-purple-300/60 mt-3 italic">
+                Desde el 26 de Septiembre de 2026 ❤️
             </p>
-        </header>
+        </div>
+    </header>
 
-        <!-- 1. CONTADOR TIEMPO JUNTOS -->
-        <section class="w-full glass-panel rounded-3xl p-6 md:p-8 mb-10 text-center relative overflow-hidden border-t-2 border-t-pink-500/50">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
-
-            <h2 class="text-xl md:text-2xl font-bold text-pink-300 mb-6 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-clock-rotate-left text-pink-400"></i> Tiempo Construyendo Nuestro Universo
-            </h2>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                <!-- Días -->
-                <div class="glass-panel bg-purple-950/30 rounded-2xl p-4 border border-pink-500/30 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300">
-                    <span id="timer-days" class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-300 to-pink-500 tracking-wider">00</span>
-                    <span class="text-xs uppercase tracking-widest text-purple-200/70 font-semibold mt-1">Días</span>
-                </div>
-                <!-- Horas -->
-                <div class="glass-panel bg-purple-950/30 rounded-2xl p-4 border border-purple-500/30 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300">
-                    <span id="timer-hours" class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-purple-200 to-purple-400 tracking-wider">00</span>
-                    <span class="text-xs uppercase tracking-widest text-purple-200/70 font-semibold mt-1">Horas</span>
-                </div>
-                <!-- Minutos -->
-                <div class="glass-panel bg-purple-950/30 rounded-2xl p-4 border border-indigo-500/30 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300">
-                    <span id="timer-minutes" class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-indigo-200 to-indigo-400 tracking-wider">00</span>
-                    <span class="text-xs uppercase tracking-widest text-purple-200/70 font-semibold mt-1">Minutos</span>
-                </div>
-                <!-- Segundos -->
-                <div class="glass-panel bg-purple-950/30 rounded-2xl p-4 border border-pink-400/30 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300">
-                    <span id="timer-seconds" class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-200 to-rose-400 tracking-wider">00</span>
-                    <span class="text-xs uppercase tracking-widest text-purple-200/70 font-semibold mt-1">Segundos</span>
-                </div>
-            </div>
+    <!-- NAVEGACIÓN PRINCIPAL POR PESTAÑAS (CATEGORÍAS) -->
+    <nav class="sticky top-4 z-30 max-w-4xl mx-auto px-4 my-6">
+        <div class="glass-panel p-1.5 rounded-2xl border border-purple-500/30 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar shadow-2xl">
             
-            <p class="text-xs text-purple-300/60 mt-4 italic">Contando activamente desde el 26 de Septiembre de 2026 ❤️</p>
-        </section>
-
-        <!-- 2. GACHA / RULETA DE RECUERDOS Y PREMIOS -->
-        <section class="w-full glass-panel rounded-3xl p-6 md:p-8 mb-10 relative">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-pink-300 flex items-center gap-2">
-                        <i class="fa-solid fa-gem text-pink-400"></i> Ruleta de Recuerdos & Cupones
-                    </h2>
-                    <p class="text-xs md:text-sm text-purple-200/70 mt-1">Prueba tu suerte y descubre sorpresas exclusivas para ti.</p>
-                </div>
-                <div class="bg-purple-900/50 border border-purple-400/30 px-4 py-2 rounded-full text-xs font-semibold text-pink-200 shadow-[0_0_10px_rgba(157,78,221,0.2)]">
-                    Colección: <span id="unlocked-count" class="text-pink-400 font-bold text-sm">0</span> / <span id="total-count" class="text-gray-300">0</span>
-                </div>
-            </div>
-
-            <!-- Botón de Lanzamiento -->
-            <button id="spin-btn" onclick="spinGacha()" class="w-full py-4 px-6 rounded-2xl font-black text-lg md:text-xl text-white bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 bg-[length:200%_auto] hover:bg-right transition-all duration-500 transform active:scale-95 shadow-[0_0_25px_rgba(255,0,127,0.5)] border border-pink-300/40 animate-pulse-glow flex items-center justify-center gap-3 mb-6">
-                <i class="fa-solid fa-wand-magic-sparkles text-yellow-300"></i>
-                <span>¡TIRAR Y ABRIR RECOMPENSA!</span>
-                <i class="fa-solid fa-gift text-yellow-300"></i>
+            <button id="tab-btn-poems" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg">
+                <i class="fa-solid fa-book-open"></i>
+                <span>📖 Poemario & Cartas</span>
             </button>
 
-            <!-- Display de Recompensa -->
-            <div id="gacha-card" class="w-full min-h-[160px] rounded-2xl p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-purple-950/20 border border-dashed border-pink-400/30 relative overflow-hidden">
-                <div id="gacha-badge" class="hidden text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
-                    Rareza
-                </div>
-                <div id="gacha-text" class="text-base md:text-lg font-medium text-purple-100 max-w-lg leading-relaxed">
-                    Presiona el botón de arriba para probar tu suerte y obtener un regalo o recuerdo especial. ✨
-                </div>
+            <button id="tab-btn-secrets" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-vault"></i>
+                <span>🔒 Secretos</span>
+            </button>
+
+            <button id="tab-btn-gacha" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-dice"></i>
+                <span>🎰 Gacha RNG</span>
+            </button>
+
+            <button id="tab-btn-coupons" class="nav-btn flex-1 min-w-[120px] py-2.5 px-3 rounded-xl text-xs md:text-sm font-semibold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-ticket"></i>
+                <span>🎟️ Cupones</span>
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL DE PÁGINAS -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 pt-2">
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 1: POEMARIO Y CARTAS DE AMOR -->
+        <!-- ========================================== -->
+        <section id="sec-poems" class="tab-content block space-y-6">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Colección de Versos</span>
+                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Nuestra Galería de Cartas</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Selecciona cualquier tarjeta para desplegar el escrito completo.</p>
+            </div>
+
+            <!-- Grid de Cartas / Poemas -->
+            <div id="poems-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Se llena dinámicamente mediante JS -->
             </div>
         </section>
 
-        <!-- 3. POEMAS Y CARTAS SECRETAS -->
-        <section class="w-full mb-10">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-pink-300 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-envelope-open-text text-pink-400"></i> Poemas y Cartas Secretas
+        <!-- ========================================== -->
+        <!-- SECCIÓN 2: VAULT DE SECRETOS -->
+        <!-- ========================================== -->
+        <section id="sec-secrets" class="tab-content hidden space-y-6">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">Acceso Reservado</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-white">Bóveda de Recuerdos & Confesiones</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Toca cada sello protegido para revelar pensamientos y detalles especiales sobre ti.</p>
+            </div>
+
+            <!-- Grid de Secretos -->
+            <div id="secrets-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Se llena dinámicamente mediante JS -->
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 3: GACHA DE RECUERDOS Y PREMIOS (RNG) -->
+        <!-- ========================================== -->
+        <section id="sec-gacha" class="tab-content hidden space-y-6">
+            <div class="glass-panel max-w-2xl mx-auto rounded-3xl p-6 md:p-10 text-center relative overflow-hidden border border-amber-500/30 shadow-[0_0_40px_rgba(245,158,11,0.15)]">
+                
+                <span class="text-xs font-black uppercase tracking-widest text-amber-300 bg-amber-950/80 px-4 py-1.5 rounded-full border border-amber-500/40 inline-block mb-3">
+                    ✨ Máquina de Recuerdos
+                </span>
+                
+                <h2 class="text-2xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-300 to-purple-200 mb-2">
+                    Gacha de Amor RNG
                 </h2>
-                <p class="text-sm text-purple-200/70 mt-1">Toca cada carta para abrirla y revelar lo que hay en mi corazón.</p>
-            </div>
+                <p class="text-xs md:text-sm text-purple-200/80 max-w-md mx-auto mb-6">
+                    Presiona el botón para tirar la suerte y descubrir recuerdos, detalles o premios clasificados por rareza.
+                </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Carta 1 -->
-                <div class="card-perspective h-64 w-full cursor-pointer" onclick="flipCard(this)">
-                    <div class="secret-card-inner relative w-full h-full rounded-2xl shadow-xl">
-                        <!-- Frente -->
-                        <div class="card-front absolute inset-0 glass-panel rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-pink-500/30 hover:border-pink-400">
-                            <div class="w-14 h-14 rounded-full bg-pink-500/20 flex items-center justify-center mb-3 text-pink-400 text-2xl shadow-[0_0_15px_rgba(255,0,127,0.3)]">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-pink-200">Poema I: Tu Luz</h3>
-                            <p class="text-xs text-purple-300/70 mt-2">Haz clic para desvelar los versos</p>
-                        </div>
-                        <!-- Reverso -->
-                        <div class="card-back absolute inset-0 glass-panel bg-purple-950/90 rounded-2xl p-6 flex flex-col items-center justify-center text-center border-2 border-pink-500 overflow-y-auto">
-                            <h4 class="font-cursive text-2xl text-pink-300 mb-2">Entre Estrellas</h4>
-                            <p class="font-cursive text-lg text-purple-100 leading-relaxed italic">
-                                "Entre millones de galaxias y constelaciones sin fin,<br>
-                                la luz de tus ojos es la única que me guía a mí.<br>
-                                Eres mi verso favorito, mi principio y mi fin."
-                            </p>
-                        </div>
+                <!-- Botón de Acción Principal -->
+                <button id="gacha-spin-btn" class="w-full max-w-sm mx-auto py-4 px-6 rounded-2xl font-black text-sm md:text-base text-slate-950 bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-300 hover:from-yellow-300 hover:to-amber-400 transition-all duration-300 transform active:scale-95 shadow-[0_0_30px_rgba(245,158,11,0.4)] border border-amber-200 flex items-center justify-center gap-3 mb-6">
+                    <i class="fa-solid fa-sparkles text-lg"></i>
+                    <span>✨ TIRAR RNG / ABRIR PREMIO ✨</span>
+                    <i class="fa-solid fa-gift text-lg"></i>
+                </button>
+
+                <!-- Área de Visualización del Premio -->
+                <div id="gacha-result-card" class="glass-card p-6 rounded-2xl border border-dashed border-amber-400/40 min-h-[160px] flex flex-col items-center justify-center transition-all">
+                    <p id="gacha-placeholder" class="text-xs md:text-sm text-purple-200/70 italic">
+                        El cofre está listo. ¡Haz clic arriba para abrir un nuevo recuerdo! 🎁
+                    </p>
+                    <div id="gacha-active-content" class="hidden space-y-3">
+                        <span id="gacha-badge" class="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full inline-block"></span>
+                        <h3 id="gacha-title" class="text-xl font-bold text-white"></h3>
+                        <p id="gacha-desc" class="text-xs md:text-sm text-purple-100 font-light leading-relaxed max-w-md mx-auto"></p>
                     </div>
                 </div>
 
-                <!-- Carta 2 -->
-                <div class="card-perspective h-64 w-full cursor-pointer" onclick="flipCard(this)">
-                    <div class="secret-card-inner relative w-full h-full rounded-2xl shadow-xl">
-                        <!-- Frente -->
-                        <div class="card-front absolute inset-0 glass-panel rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-purple-500/30 hover:border-purple-400">
-                            <div class="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mb-3 text-purple-300 text-2xl shadow-[0_0_15px_rgba(157,78,221,0.3)]">
-                                <i class="fa-solid fa-key"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-purple-200">Un Secreto Inconfesable</h3>
-                            <p class="text-xs text-purple-300/70 mt-2">Haz clic para descubrir la verdad</p>
-                        </div>
-                        <!-- Reverso -->
-                        <div class="card-back absolute inset-0 glass-panel bg-purple-950/90 rounded-2xl p-6 flex flex-col items-center justify-center text-center border-2 border-purple-400 overflow-y-auto">
-                            <h4 class="font-semibold text-lg text-purple-300 mb-2"><i class="fa-solid fa-lock-open mr-1"></i> Mi Secreto</h4>
-                            <p class="text-sm text-purple-100 leading-relaxed font-light">
-                                ¿Sabías que desde la primera vez que hablamos, supe que tu sonrisa cambiaría mi mundo? Antes de decírtelo, ya sonreía solo al ver tu nombre en mi pantalla.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carta 3 -->
-                <div class="card-perspective h-64 w-full cursor-pointer" onclick="flipCard(this)">
-                    <div class="secret-card-inner relative w-full h-full rounded-2xl shadow-xl">
-                        <!-- Frente -->
-                        <div class="card-front absolute inset-0 glass-panel rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-indigo-500/30 hover:border-indigo-400">
-                            <div class="w-14 h-14 rounded-full bg-indigo-500/20 flex items-center justify-center mb-3 text-indigo-300 text-2xl shadow-[0_0_15px_rgba(99,102,241,0.3)]">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-indigo-200">¿Por qué eres la mejor?</h3>
-                            <p class="text-xs text-purple-300/70 mt-2">Haz clic para ver las razones</p>
-                        </div>
-                        <!-- Reverso -->
-                        <div class="card-back absolute inset-0 glass-panel bg-purple-950/90 rounded-2xl p-6 flex flex-col items-center justify-center text-center border-2 border-indigo-400 overflow-y-auto">
-                            <h4 class="font-semibold text-lg text-indigo-300 mb-2">Razones Incalculables</h4>
-                            <p class="text-xs md:text-sm text-purple-100 leading-relaxed text-left">
-                                ✨ Tu paciencia y dulzura infinitas.<br>
-                                ✨ La forma en la que te ríes de mis bromas.<br>
-                                ✨ Cómo iluminas cualquier lugar con tu presencia.<br>
-                                ✨ Simplemente por ser **TÚ**, única e irremplazable.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carta 4 -->
-                <div class="card-perspective h-64 w-full cursor-pointer" onclick="flipCard(this)">
-                    <div class="secret-card-inner relative w-full h-full rounded-2xl shadow-xl">
-                        <!-- Frente -->
-                        <div class="card-front absolute inset-0 glass-panel rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-pink-400/30 hover:border-pink-300">
-                            <div class="w-14 h-14 rounded-full bg-rose-500/20 flex items-center justify-center mb-3 text-rose-300 text-2xl shadow-[0_0_15px_rgba(244,63,94,0.3)]">
-                                <i class="fa-solid fa-infinity"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-pink-200">Promesa del Futuro</h3>
-                            <p class="text-xs text-purple-300/70 mt-2">Haz clic para leer nuestra promesa</p>
-                        </div>
-                        <!-- Reverso -->
-                        <div class="card-back absolute inset-0 glass-panel bg-purple-950/90 rounded-2xl p-6 flex flex-col items-center justify-center text-center border-2 border-rose-400 overflow-y-auto">
-                            <h4 class="font-cursive text-2xl text-rose-300 mb-2">Eternidad</h4>
-                            <p class="font-cursive text-lg text-purple-100 leading-relaxed italic">
-                                "Prometo tomar tu mano en cada tormenta, celebrar cada una de tus victorias y amarte más cada día que pasa. Este amor no tiene fecha de caducidad."
-                            </p>
-                        </div>
-                    </div>
+                <!-- Contador de Colección -->
+                <div class="mt-6 flex items-center justify-between px-4 text-xs text-purple-300/80 border-t border-purple-800/40 pt-4">
+                    <span>Colección de Recuerdos Descubiertos:</span>
+                    <span id="gacha-counter-badge" class="font-bold text-amber-300 font-mono bg-purple-950/60 px-3 py-1 rounded-full border border-amber-500/30">0 / 8</span>
                 </div>
             </div>
         </section>
 
-        <!-- FOOTER -->
-        <footer class="text-center text-xs text-purple-300/50 pt-6 border-t border-purple-900/50 w-full">
-            Hecho con todo el amor de mi alma ❤️ • Gracias por existir
-        </footer>
+        <!-- ========================================== -->
+        <!-- SECCIÓN 4: CUPONES DE AMOR -->
+        <!-- ========================================== -->
+        <section id="sec-coupons" class="tab-content hidden space-y-6">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Pases Especiales</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-white">Vales & Cupones de Amor</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Canjea cualquiera de estos vales especiales cuando lo desees.</p>
+            </div>
 
+            <!-- Grid de Cupones -->
+            <div id="coupons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Se llena dinámicamente mediante JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- MODALES DE LECTURA Y DETALLE -->
+    <!-- ========================================== -->
+
+    <!-- Modal 1: Lectura Completa de Poema -->
+    <div id="modal-poem" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-panel max-w-lg w-full rounded-3xl p-6 md:p-8 text-center relative border border-pink-500/40 shadow-[0_0_50px_rgba(255,42,133,0.3)] max-h-[85vh] flex flex-col">
+            <button id="close-modal-poem" class="absolute top-4 right-4 text-purple-300 hover:text-pink-400 text-lg w-8 h-8 rounded-full bg-purple-950/60 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-400 flex items-center justify-center mx-auto mb-3 text-pink-400 text-xl shadow-lg">
+                <i id="poem-modal-icon" class="fa-solid fa-feather-pointed"></i>
+            </div>
+
+            <span id="poem-modal-tag" class="text-[10px] uppercase font-bold tracking-widest text-pink-300 bg-pink-950/60 px-3 py-0.5 rounded-full inline-block mx-auto mb-2">Poema Especial</span>
+            <h3 id="poem-modal-title" class="text-2xl font-bold text-white mb-4 font-serif">Título</h3>
+
+            <div class="bg-purple-950/50 p-5 rounded-2xl border border-purple-500/30 overflow-y-auto mb-4 text-left">
+                <p id="poem-modal-body" class="font-serif text-sm md:text-base text-pink-100 leading-relaxed italic whitespace-pre-line">
+                    Contenido del poema...
+                </p>
+            </div>
+
+            <button id="btn-close-poem-bottom" class="w-full py-2.5 rounded-xl font-bold text-xs uppercase bg-gradient-to-r from-pink-600 to-purple-600 text-white hover:opacity-90 transition-all">
+                Cerrar Lectura ❤️
+            </button>
+        </div>
     </div>
 
-    <!-- SCRIPT PRINCIPAL -->
-    <script>
-        // ========================================================
-        // 1. CONTADOR DE TIEMPO EXACTO
-        // ========================================================
-        // Fecha exacta de inicio: 26 de Septiembre de 2026 (00:00:00)
-        // Usamos UTC explícito para evitar problemas de desfase en navegadores
-        const START_DATE = Date.UTC(2026, 7, 26, 0, 0, 0); //
+    <!-- Modal 2: Secreto Revelado -->
+    <div id="modal-secret" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-panel max-w-md w-full rounded-3xl p-6 md:p-8 text-center relative border border-amber-500/40 shadow-[0_0_50px_rgba(245,158,11,0.25)]">
+            <button id="close-modal-secret" class="absolute top-4 right-4 text-purple-300 hover:text-amber-400 text-lg w-8 h-8 rounded-full bg-purple-950/60 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="w-14 h-14 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center mx-auto mb-3 text-amber-300 text-2xl shadow-lg">
+                <i id="secret-modal-icon" class="fa-solid fa-key"></i>
+            </div>
+
+            <span class="text-[10px] uppercase font-bold tracking-widest text-amber-300 bg-amber-950/80 px-3 py-1 rounded-full inline-block mb-2">
+                🔓 Confesión Revelada
+            </span>
+            <h3 id="secret-modal-title" class="text-xl font-bold text-white mb-3">Título del Secreto</h3>
+
+            <div class="bg-purple-950/60 p-4 rounded-2xl border border-dashed border-amber-500/40 mb-5 text-left">
+                <p id="secret-modal-body" class="text-xs md:text-sm text-purple-100 leading-relaxed font-sans">
+                    Contenido del secreto...
+                </p>
+            </div>
+
+            <button id="btn-close-secret-bottom" class="w-full py-2.5 rounded-xl font-bold text-xs uppercase bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 hover:opacity-90 transition-all">
+                Guardar en mi Memoria ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal 3: Ticket Confirmación de Cupón -->
+    <div id="modal-ticket" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-panel max-w-md w-full rounded-3xl p-6 text-center relative border border-pink-500/50 shadow-[0_0_50px_rgba(255,42,133,0.3)]">
+            <button id="close-modal-ticket" class="absolute top-4 right-4 text-purple-300 hover:text-pink-400 text-lg">
+                <i class=
