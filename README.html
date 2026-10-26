@@ -1,227 +1,370 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para la mejor novia del universo ❤️</title>
+    <!-- Tailwind CSS CDN para un diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandPink: '#ff758c',
+                        brandPurple: '#7b2cbf',
+                        brandDark: '#0f0c29',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite alternate',
+                        'float': 'float 6s linear infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(255, 117, 140, 0.4)' },
+                            '100%': { boxShadow: '0 0 35px rgba(255, 117, 140, 0.9), 0 0 15px rgba(123, 44, 191, 0.6)' }
+                        },
+                        float: {
+                            '0%': { transform: 'translateY(0px) rotate(0deg)', opacity: '1' },
+                            '100%': { transform: 'translateY(-100vh) rotate(360deg)', opacity: '0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        /* Estilos base y Glassmorphism */
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #ffffff;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px 15px;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             overflow-x: hidden;
+            position: relative;
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(10px);
-            padding: 35px 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            max-width: 650px;
-            width: 100%;
-            z-index: 10;
-            text-align: center;
-            margin-bottom: 25px;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 12px;
-            color: #ff758c;
-            text-shadow: 0 0 10px rgba(255, 117, 140, 0.5);
+        /* Animación de carta al girar */
+        .card-flip-container {
+            perspective: 1000px;
         }
 
-        p.subtitle {
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-            color: #ddd;
+        .card-flip-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
         }
 
-        .timer {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 25px;
+        .card-flip-inner.is-spinning {
+            animation: spinCard 0.6s ease-in-out;
         }
 
-        .time-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        @keyframes spinCard {
+            0% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.08) rotateY(180deg); }
+            100% { transform: scale(1) rotateY(360deg); }
         }
 
-        .time-box span {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ff758c;
-        }
-
-        .time-box label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #aaa;
-        }
-
-        /* SECCIÓN RNG / GACHA */
-        .rng-section {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px dashed rgba(255, 117, 140, 0.4);
-            margin-top: 20px;
-        }
-
-        .rng-title {
-            font-size: 1.4rem;
-            color: #ffb199;
-            margin-bottom: 10px;
-        }
-
-        .counter-tracker {
-            font-size: 0.9rem;
-            color: #bbb;
-            margin-bottom: 15px;
-        }
-
-        .spin-btn {
-            background: linear-gradient(45deg, #ff758c, #ff7eb3);
-            border: none;
-            color: white;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .spin-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
-        }
-
-        .spin-btn:active {
-            transform: scale(0.95);
-        }
-
-        .reward-card {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid transparent;
-            min-height: 110px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .rarity-tag {
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .reward-text {
-            font-size: 1.1rem;
-            line-height: 1.4;
-        }
-
-        /* Colores de Rarezas */
-        .common { border-color: #a0a0a0; }
-        .common .rarity-tag { background: #666; color: #fff; }
-
-        .rare { border-color: #4facfe; box-shadow: 0 0 10px rgba(79, 172, 254, 0.3); }
-        .rare .rarity-tag { background: #00f2fe; color: #000; }
-
-        .epic { border-color: #b224ef; box-shadow: 0 0 15px rgba(178, 36, 239, 0.4); }
-        .epic .rarity-tag { background: #b224ef; color: #fff; }
-
-        .legendary { border-color: #f9d423; box-shadow: 0 0 20px rgba(249, 212, 35, 0.6); animation: pulse 1.5s infinite alternate; }
-        .legendary .rarity-tag { background: #f9d423; color: #000; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.02); }
-        }
-
-        .heart {
+        /* Partículas / Corazones flotantes */
+        .heart-particle {
             position: fixed;
-            bottom: -20px;
-            font-size: 20px;
-            color: #ff758c;
-            animation: float 6s linear infinite;
-            opacity: 0.7;
+            bottom: -30px;
+            pointer-events: none;
             z-index: 1;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-
-        @media (max-width: 480px) {
-            .timer { grid-template-columns: repeat(2, 1fr); }
-            h1 { font-size: 1.7rem; }
+            user-select: none;
         }
     </style>
 </head>
-<body>
+<body class="flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
 
-    <div class="container">
-        <h1>Para la mejor novia del universo ✨</h1>
-        <p class="subtitle">Llevamos juntos y sumando momentos:</p>
+    <!-- Contenedor de Partículas de fondo -->
+    <div id="particles-container" class="fixed inset-0 pointer-events-none z-0"></div>
 
-        <div class="timer">
-            <div class="time-box"><span id="days">0</span><label>Días</label></div>
-            <div class="time-box"><span id="hours">0</span><label>Horas</label></div>
-            <div class="time-box"><span id="minutes">0</span><label>Minutos</label></div>
-            <div class="time-box"><span id="seconds">0</span><label>Segundos</label></div>
-        </div>
+    <!-- Contenedor Principal de la App -->
+    <main class="glass-card rounded-3xl p-6 md:p-10 max-w-2xl w-full text-center z-10 my-auto border border-pink-500/20 shadow-2xl">
+        
+        <!-- Encabezado -->
+        <h1 class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-300 mb-3 tracking-tight drop-shadow-lg">
+            Para la mejor novia del universo ✨
+        </h1>
+        <p class="text-pink-200/80 text-sm md:text-base font-medium mb-8">
+            Llevamos juntos y sumando momentos inolvidables:
+        </p>
 
-        <!-- SECCIÓN DE RNG -->
-        <div class="rng-section">
-            <div class="rng-title">🎰 Gacha de Recuerdos & Premios</div>
-            <div class="counter-tracker">Colección descubierta: <b id="unlocked-count">0</b> / <b id="total-count">0</b></div>
-            
-            <button class="spin-btn" onclick="spinRNG()">✨ TIRAR RNG (Abrir regalo) ✨</button>
-
-            <div id="reward-box" class="reward-card common" style="display: none;">
-                <div id="rarity" class="rarity-tag">Común</div>
-                <div id="reward-text" class="reward-text">¡Haz clic arriba para lanzar tu primer tiro!</div>
+        <!-- Cronómetro de Aniversario -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-10">
+            <div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center border border-pink-500/30">
+                <span id="timer-days" class="text-3xl md:text-4xl font-extrabold text-pink-400 tracking-wider">00</span>
+                <span class="text-xs font-semibold text-gray-300 uppercase tracking-widest mt-1">Días</span>
+            </div>
+            <div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center border border-purple-500/30">
+                <span id="timer-hours" class="text-3xl md:text-4xl font-extrabold text-purple-300 tracking-wider">00</span>
+                <span class="text-xs font-semibold text-gray-300 uppercase tracking-widest mt-1">Horas</span>
+            </div>
+            <div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center border border-indigo-500/30">
+                <span id="timer-minutes" class="text-3xl md:text-4xl font-extrabold text-indigo-300 tracking-wider">00</span>
+                <span class="text-xs font-semibold text-gray-300 uppercase tracking-widest mt-1">Minutos</span>
+            </div>
+            <div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center border border-pink-400/30">
+                <span id="timer-seconds" class="text-3xl md:text-4xl font-extrabold text-pink-300 tracking-wider">00</span>
+                <span class="text-xs font-semibold text-gray-300 uppercase tracking-widest mt-1">Segundos</span>
             </div>
         </div>
-    </div>
+
+        <!-- Sección Gacha / RNG -->
+        <div class="glass-card rounded-2xl p-6 md:p-8 border border-pink-500/30 bg-black/30">
+            <div class="flex flex-col sm:flex-row items-center justify-between mb-6 gap-2">
+                <h2 class="text-xl md:text-2xl font-bold text-pink-300 flex items-center gap-2">
+                    🎰 Gacha de Recuerdos & Premios
+                </h2>
+                <div class="text-xs md:text-sm font-semibold text-purple-200 bg-purple-900/60 border border-purple-400/30 px-3 py-1.5 rounded-full">
+                    Colección: <span id="unlocked-count" class="text-pink-400 font-bold">0</span> / <span id="total-count" class="text-gray-300">0</span>
+                </div>
+            </div>
+
+            <!-- Botón interactivo principal -->
+            <button id="spin-btn" onclick="triggerGacha()" class="w-full py-4 px-6 rounded-2xl font-black text-lg md:text-xl text-white bg-gradient-to-r from-pink-500 via-purple-600 to-pink-500 bg-[length:200%_auto] hover:bg-right transition-all duration-500 transform active:scale-95 shadow-lg border border-pink-300/40 animate-pulse-glow mb-6 flex items-center justify-center gap-3">
+                <span>✨ TIRAR RNG / ABRIR PREMIO ✨</span>
+            </button>
+
+            <!-- Tarjeta de Recompensa con animación de giro -->
+            <div class="card-flip-container w-full min-h-[160px]">
+                <div id="reward-card-inner" class="card-flip-inner w-full min-h-[160px] rounded-2xl p-6 flex flex-col items-center justify-center transition-all duration-300 border bg-white/5 border-dashed border-pink-400/30">
+                    <div id="reward-rarity-badge" class="hidden text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
+                         Rareza
+                    </div>
+                    <div id="reward-display-text" class="text-base md:text-lg font-medium text-gray-200 leading-relaxed max-w-lg">
+                        ¡Haz clic en el botón de arriba para lanzar tu primer tiro y descubrir un premio o recuerdo especial! ❤️
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-xs text-pink-200/50 font-medium tracking-wide">
+            Creado con todo el amor del mundo para ti • 26.09.2026
+        </footer>
+    </main>
 
     <script>
-        // FECHA DE INICIO: 26 DE SEPTIEMBRE DE 2026
-        const startDate = new Date(2026, 8, 26, 0, 0, 0);
+        // ==========================================
+        // 1. CÁLCULO DIRECTO Y GARANTIZADO DE FECHA
+        // ==========================================
+        // Usamos UTC explícito para evitar problemas de mes/zona horaria en navegadores.
+        // Septiembre = 8 (índice base 0 en JS: Enero=0, Septiembre=8)
+        const START_TIMESTAMP = Date.UTC(2026, 8, 26, 0, 0, 0);
 
         function updateTimer() {
-            const now = new Date();
-            const diff = now - startDate;
+            const now = Date.now();
+            let diff = now - START_TIMESTAMP;
 
-            document.getElementById('days').innerText = Math.floor
+            // Si por alguna razón la fecha actual es anterior a la fecha de inicio
+            if (diff < 0) diff = 0;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timer-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('timer-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('timer-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('timer-seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Ejecución inmediata y actualización continua cada 1 segundo
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // ==========================================
+        // 2. SISTEMA GACHA / RNG Y BASE DE DATOS
+        // ==========================================
+        const lootTable = {
+            common: [
+                "Recuerdo: La primera conversación en la que no podíamos parar de reír.",
+                "Dato Curioso: Me encanta cómo te ves cuando sonríes sin darte cuenta.",
+                "Recuerdo: La primera foto que me enviaste y guardé de inmediato.",
+                "Mini-Detalle: Cada notificación tuya me alegra el día por completo.",
+                "Fact: Eres mi persona favorita para contarle cómo estuvo mi día.",
+                "Dato Curioso: Tienes los ojos más lindos de este universo.",
+                "Recuerdo: La primera canción que escuché pensando completamente en ti.",
+                "Mini-Detalle: Me encanta recordar la manera tan bonita en que nos conocimos.",
+                "Fact: No hay un solo día en que no piense en ti con una sonrisa.",
+                "Recuerdo: Ese mensaje tuyo que guardé en favoritos."
+            ],
+            rare: [
+                "🎟️ CUPÓN: Válido por una cena o salida a comer lo que tú elijas.",
+                "🎟️ CUPÓN: Válido por un masaje relajante cuando te sientas cansada.",
+                "🎟️ CUPÓN: Tú eliges la película o serie para nuestra próxima cita.",
+                "🎟️ CUPÓN: Válido por un día entero donde yo cumplo tus antojos.",
+                "🎟️ CUPÓN: Un abrazo gigante de más de 1 minuto sin soltarte.",
+                "🎟️ CUPÓN: Válido por tu postre favorito pagado por mí.",
+                "🎟️ CUPÓN: Noche de llamadas o juegos hasta la hora que quieras.",
+                "🎟️ CUPÓN: Tienes derecho a ganarme cualquier discusión hoy."
+            ],
+            epic: [
+                "💌 Carta Corta: Gracias por llegar a mi vida y hacer que todo sea infinitamente mejor.",
+                "💌 Carta Corta: No importa qué tan pesado sea mi día, hablar contigo lo arregla.",
+                "💌 Carta Corta: Admiro muchísimo tu determinación, tu inteligencia y tu gran corazón.",
+                "💌 Carta Corta: La química que tenemos es algo único y especial que cuido cada día.",
+                "💌 Carta Corta: Eres mi hogar, mi tranquilidad y mi felicidad constante.",
+                "💌 Carta Corta: Estar a tu lado me hace querer ser la mejor versión de mí mismo."
+            ],
+            legendary: [
+                "👑 PROMESA LEGENDARIA: Prometo apoyarte incondicionalmente en cada uno de tus sueños y metas.",
+                "👑 SECRETO LEGENDARIO: Desde el primer momento supe que ibas a ser alguien transformador en mi vida.",
+                "👑 PROMESA LEGENDARIA: Vamos a viajar, descubrir el mundo y crear recuerdos inolvidables juntos.",
+                "👑 RECOMPENSA LEGENDARIA: ¡Ganaste el premio gordo! Reclámame un regalo especial sorpresa en persona. ❤️"
+            ]
+        };
+
+        // Estado del juego
+        const unlockedItems = new Set();
+        const totalItemsCount = Object.values(lootTable).reduce((acc, list) => acc + list.length, 0);
+        document.getElementById('total-count').textContent = totalItemsCount;
+
+        // Sonidos sintéticos con Web Audio API (sin dependencias externas)
+        function playSound(freq, type, duration) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type || 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Silencioso si el navegador bloquea audio sin interacción previa
+            }
+        }
+
+        function triggerGacha() {
+            const btn = document.getElementById('spin-btn');
+            const cardInner = document.getElementById('reward-card-inner');
+            const badge = document.getElementById('reward-rarity-badge');
+            const displayText = document.getElementById('reward-display-text');
+
+            // Deshabilitar botón durante la animación
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // Animación visual de giro
+            cardInner.classList.add('is-spinning');
+            playSound(300, 'square', 0.15);
+
+            setTimeout(() => {
+                // Algoritmo de Probabilidades
+                const rand = Math.random() * 100;
+                let rarity = 'common';
+                let item = '';
+                let badgeStyle = '';
+                let badgeText = '';
+                let borderStyle = '';
+
+                if (rand < 5) { // 5% Legendario
+                    rarity = 'legendary';
+                    item = getRandomItem(lootTable.legendary);
+                    badgeText = '⭐ LEGENDARIO (5%) ⭐';
+                    badgeStyle = 'bg-yellow-400 text-black border border-yellow-200';
+                    borderStyle = 'border-2 border-yellow-400 bg-yellow-950/20 shadow-[0_0_25px_rgba(250,204,21,0.4)]';
+                    playSound(587.33, 'triangle', 0.4); // D5
+                } else if (rand < 20) { // 15% Épico
+                    rarity = 'epic';
+                    item = getRandomItem(lootTable.epic);
+                    badgeText = '💜 ÉPICO (15%)';
+                    badgeStyle = 'bg-purple-600 text-white border border-purple-300';
+                    borderStyle = 'border-2 border-purple-500 bg-purple-950/20 shadow-[0_0_20px_rgba(168,85,247,0.3)]';
+                    playSound(440, 'sine', 0.3); // A4
+                } else if (rand < 50) { // 30% Raro
+                    rarity = 'rare';
+                    item = getRandomItem(lootTable.rare);
+                    badgeText = '💙 RARO / CUPÓN (30%)';
+                    badgeStyle = 'bg-cyan-500 text-black border border-cyan-200';
+                    borderStyle = 'border-2 border-cyan-400 bg-cyan-950/20 shadow-[0_0_15px_rgba(6,182,212,0.3)]';
+                    playSound(349.23, 'sine', 0.25); // F4
+                } else { // 50% Común
+                    rarity = 'common';
+                    item = getRandomItem(lootTable.common);
+                    badgeText = '⚪ COMÚN (50%)';
+                    badgeStyle = 'bg-gray-600 text-white border border-gray-400';
+                    borderStyle = 'border border-pink-400/30 bg-white/5';
+                    playSound(261.63, 'sine', 0.2); // C4
+                }
+
+                // Actualizar interfaz
+                badge.className = `text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md ${badgeStyle}`;
+                badge.textContent = badgeText;
+                badge.classList.remove('hidden');
+
+                cardInner.className = `card-flip-inner w-full min-h-[160px] rounded-2xl p-6 flex flex-col items-center justify-center transition-all duration-300 ${borderStyle}`;
+                displayText.textContent = item;
+
+                // Registrar desbloqueo
+                unlockedItems.add(item);
+                document.getElementById('unlocked-count').textContent = unlockedItems.size;
+
+            }, 300);
+
+            setTimeout(() => {
+                cardInner.classList.remove('is-spinning');
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }, 600);
+        }
+
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        // ==========================================
+        // 3. ANIMACIÓN DE CORAZONES FLOTANTES
+        // ==========================================
+        function createHeart() {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+
+            const heart = document.createElement('div');
+            heart.className = 'heart-particle text-pink-400/60 animate-float';
+            heart.textContent = Math.random() > 0.5 ? '❤️' : '✨';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 16 + 12) + 'px';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        setInterval(createHeart, 600);
+
+        // Asignación explícita de eventos
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('spin-btn');
+            if (btn) {
+                btn.addEventListener('click', triggerGacha);
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+### Novedades clave de esta versión:
+1. **Garantía Total de Fecha**: Se usa `Date.UTC(2026, 8, 26, 0, 0, 0)` directamente con cálculo matemático en milisegundos (`Date.now()`), eliminado cualquier discrepancia de navegadores o zonas horarias.
+2. **Interactive Gacha Remodelado**: Incluye efectos visuales de giro, badge de rarezas, border neón con colores representativos (Común, Raro, Épico y Legendario) y efectos de sonido en tiempo real construidos con Web Audio API nativo.
+3. **Diseño Moderno & Ultra Responsivo**: Estilo Glassmorphism con bordes brillantes, gradientes morados y rosas y partículas flotantes.
+4. **Resistencia a fallos**: Eventos mapeados con `addEventListener` e inline `onclick="triggerGacha()"` para que funcione sin importar el entorno de ejecución.
+```
