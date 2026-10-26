@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para Ti ❤️</title>
+  <title>Feliz Mes, Mi Amor ❤️</title>
   <style>
     :root {
-      --bg-color: #ffeef2;
+      --bg-color: #fdf0f4;
       --letter: #ffffff;
-      --letter-love: 400px;
       --text-color: #d63031;
       --accent-color: #ff7675;
+      --gold: #fdcb6e;
     }
 
     * {
@@ -25,91 +25,148 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
-      overflow: hidden;
+      align-items: flex-start; /* Permite scroll si el contenido es largo */
+      overflow-x: hidden;
       position: relative;
+      padding: 40px 20px;
     }
 
-    /* Tu clase corregida y adaptada para centrarse perfectamente */
+    /* Contenedor principal extendido */
     .Para_ti {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 90%;
-      max-width: 500px;
-      height: var(--letter-love);
-      font-size: 1.2rem; /* Ajustado para que el texto largo quepa bien */
-      font-family: sans-serif; /* Cambia "te amo" por una fuente del sistema si no la tienes instalada */
+      position: relative;
+      width: 100%;
+      max-width: 600px;
       background: var(--letter);
-      transform: translate(-50%, -50%);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(214, 48, 49, 0.15);
+      padding: 40px 30px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(214, 48, 49, 0.12);
       text-align: center;
+      border: 2px solid var(--gold);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      border: 2px solid #fdcb6e;
+      gap: 30px;
     }
 
     .corazon-principal {
-      font-size: 3rem;
+      font-size: 3.5rem;
       animation: latido 1.2s infinite;
+      margin-bottom: -10px;
     }
 
     h1 {
       color: var(--text-color);
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    .subtitulo {
+      color: #7f8c8d;
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    /* Sección del Contador de Meses */
+    .contador-box {
+      background-color: #fff5f7;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px dashed var(--accent-color);
+    }
+
+    .contador-titulo {
+      font-size: 0.9rem;
+      color: #636e72;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       margin-bottom: 10px;
     }
 
-    p {
-      color: #636e72;
-      line-height: 1.6;
+    .contador-numero {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: var(--text-color);
     }
 
+    /* Mensaje Principal */
+    .carta-texto {
+      color: #2d3436;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      text-align: justify;
+    }
+
+    /* Línea de tiempo o Razones por las que te amo */
+    .detalles-amor {
+      text-align: left;
+      background: #fdf8f9;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .detalles-amor h3 {
+      color: var(--text-color);
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      border-bottom: 2px solid #f8d7da;
+      padding-bottom: 5px;
+    }
+
+    .item-amor {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #4a4a4a;
+    }
+
+    .item-amor span {
+      color: var(--accent-color);
+    }
+
+    /* Botón Interactivo */
     .boton-amor {
       background-color: var(--text-color);
       color: white;
       border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 25px;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: 30px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
+      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
       font-weight: bold;
+      box-shadow: 0 5px 15px rgba(214, 48, 49, 0.3);
+      align-self: center;
     }
 
     .boton-amor:hover {
       background-color: var(--accent-color);
       transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(214, 48, 49, 0.4);
     }
 
-    /* Animación de latido para el corazón */
+    /* Animaciones */
     @keyframes latido {
-      0% { transform: scale(1); }
+      0%, 100% { transform: scale(1); }
       20% { transform: scale(1.1); }
       40% { transform: scale(1.05); }
       60% { transform: scale(1.15); }
-      80% { transform: scale(1); }
-      100% { transform: scale(1); }
     }
 
-    /* Corazones flotantes del fondo */
     .corazon-flotante {
       position: absolute;
       color: var(--accent-color);
       pointer-events: none;
-      font-size: 20px;
       animation: flotar 3s linear forwards;
+      z-index: 100;
     }
 
     @keyframes flotar {
       0% {
-        transform: translateY(100vh) scale(0);
+        transform: translateY(100vh) scale(0) rotate(0deg);
         opacity: 1;
       }
       100% {
-        transform: translateY(-10vh) scale(1.5);
+        transform: translateY(-10vh) scale(1.5) rotate(360deg);
         opacity: 0;
       }
     }
@@ -117,39 +174,93 @@
 </head>
 <body>
 
-  <!-- Contenedor principal utilizando tu clase modificada -->
   <div class="Para_ti">
     <div class="corazon-principal">❤️</div>
+    
     <div>
-      <h1>Para la persona más especial</h1>
-      <p>Cada día que pasa me doy cuenta de lo mucho que significas para mí. Esta pequeña página web es solo un detalle para recordarte cuánto te amo.</p>
+      <h1>¡Feliz 26, Mi Amor!</h1>
+      <p class="subtitulo">Cada mes a tu lado es mi regalo favorito</p>
     </div>
-    <button class="boton-amor" onclick="crearCorazones()">¡Haz clic aquí!</button>
+
+    <!-- Caja del Contador Dinámico -->
+    <div class="contador-box">
+      <p class="contador-titulo">⏳ Próximo mes en...</p>
+      <div class="contador-numero" id="cuenta-atras">Cargando...</div>
+    </div>
+
+    <!-- Mensaje Largo -->
+    <div class="carta-texto">
+      <p>Hoy es 26, un día increíblemente especial porque me recuerda el momento en el que decidimos empezar a escribir esta historia juntos. No me canso de agradecer la suerte que tengo de tenerte en mi vida, de compartir risas, abrazos y hasta los días más simples, convirtiéndolos en momentos perfectos.</p>
+      <br>
+      <p>Gracias por tu paciencia, por tu apoyo incondicional y por quererme de la forma en que lo haces. Eres mi lugar seguro y mi persona favorita en todo el mundo entero. ¡Feliz cumple mes!</p>
+    </div>
+
+    <!-- Lista Detallada -->
+    <div class="detalles-amor">
+      <h3>Tres cosas que me encantan de ti:</h3>
+      <div class="item-amor"><span>✨</span> Tu sonrisa y cómo eres capaz de iluminar mi día por completo en un segundo.</div>
+      <div class="item-amor"><span>✨</span> La forma tan bonita en la que me cuidas y me haces sentir especial siempre.</div>
+      <div class="item-amor"><span>✨</span> Absolutamente todos los momentos, metas y sueños que estamos construyendo juntos.</div>
+    </div>
+
+    <!-- Botón de Sorpresa -->
+    <button class="boton-amor" onclick="crearCorazones()">¡Presiona para una sorpresa!</button>
   </div>
 
   <script>
-    // Función interactiva para lanzar corazones de fondo
+    // LÓGICA DEL CONTADOR DINÁMICO (Hacia el próximo día 26)
+    function actualizarContador() {
+      const ahora = new Date();
+      let añoObjetivo = ahora.getFullYear();
+      let mesObjetivo = ahora.getMonth();
+      
+      // Si hoy ya pasamos del día 26, apuntamos al 26 del próximo mes
+      if (ahora.getDate() >= 26) {
+        mesObjetivo++;
+        if (mesObjetivo > 11) {
+          mesObjetivo = 0;
+          añoObjetivo++;
+        }
+      }
+      
+      const fechaObjetivo = new Date(añoObjetivo, mesObjetivo, 26, 0, 0, 0);
+      const diferencia = fechaObjetivo - ahora;
+
+      // Si es exactamente el día 26
+      if (ahora.getDate() === 26) {
+        document.getElementById('cuenta-atras').innerHTML = "¡HOY ES NUESTRO DÍA! 🎉❤️";
+        return;
+      }
+
+      // Cálculo de tiempo restante
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById('cuenta-atras').innerHTML = `${dias}d ${horas}h ${minutos}m`;
+    }
+
+    // Ejecutar contador inmediatamente y actualizar cada minuto
+    actualizarContador();
+    setInterval(actualizarContador, 60000);
+
+    // LLUVIA DE CORAZONES INTERACTIVA
     function crearCorazones() {
-      for(let i = 0; i < 15; i++) {
+      const iconos = ['❤️', '💖', '💝', '💕', '✨'];
+      for(let i = 0; i < 30; i++) {
         setTimeout(() => {
           const corazon = document.createElement('div');
           corazon.classList.add('corazon-flotante');
-          corazon.innerText = '❤️';
+          corazon.innerText = iconos[Math.floor(Math.random() * iconos.length)];
           
-          // Posición horizontal aleatoria
           corazon.style.left = Math.random() * 100 + 'vw';
-          // Tamaño aleatorio
-          corazon.style.fontSize = Math.random() * 20 + 10 + 'px';
-          // Duración de la animación aleatoria
-          corazon.style.animationDuration = Math.random() * 2 + 2 + 's';
+          corazon.style.fontSize = Math.random() * 25 + 15 + 'px';
+          corazon.style.animationDuration = Math.random() * 2 + 25 + 's'; // Variedad de velocidades
           
           document.body.appendChild(corazon);
           
-          // Eliminar el elemento después de que termine la animación
-          setTimeout(() => {
-            corazon.remove();
-          }, 4000);
-        }, i * 100);
+          setTimeout(() => { corazon.remove(); }, 3000);
+        }, i * 80);
       }
     }
   </script>
