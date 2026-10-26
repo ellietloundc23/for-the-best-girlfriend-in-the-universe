@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para la mejor novia del universo ✨</title>
+    <title>Para la Mejor Novia del Universo ✨ | Nuestra Historia</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons CDN -->
+    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Canvas Confetti Library CDN -->
+    <!-- Canvas Confetti CDN -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
@@ -26,8 +26,8 @@
                         handwritten: ['Caveat', 'cursive'],
                     },
                     colors: {
-                        deepSpace: '#070510',
-                        cosmicCard: '#130e28',
+                        deepSpace: '#05030a',
+                        cosmicCard: '#110b21',
                         neonPink: '#ff2a85',
                         roseAccent: '#ff758c',
                         purpleGlow: '#a855f7',
@@ -36,13 +36,13 @@
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 5s ease-in-out infinite',
-                        'glow': 'glow 2.5s ease-in-out infinite alternate',
+                        'float': 'float 4s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(-8px)' },
                         },
                         glow: {
                             '0%': { filter: 'drop-shadow(0 0 5px rgba(255, 42, 133, 0.4))' },
@@ -57,31 +57,41 @@
     <style>
         /* CSS BASE & COSMIC THEMING */
         body {
-            background: radial-gradient(circle at 50% -20%, #20123a 0%, #080512 70%, #030207 100%);
-            background-attachment: fixed;
+            background: #05030a;
             color: #f8fafc;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
+        /* CANVAS BACKGROUND */
+        #galaxy-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         /* CUSTOM SCROLLBARS */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #080512; }
-        ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.4); border-radius: 999px; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #05030a; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 42, 133, 0.4); border-radius: 999px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255, 42, 133, 0.8); }
 
         /* GLASSMORPHISM PANELS */
         .glass-panel {
-            background: rgba(19, 14, 40, 0.55);
+            background: rgba(17, 11, 33, 0.65);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
 
         .glass-card {
-            background: rgba(25, 18, 52, 0.65);
+            background: rgba(23, 15, 46, 0.7);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -89,252 +99,249 @@
         }
 
         .glass-card:hover {
-            border-color: rgba(255, 117, 140, 0.4);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px -10px rgba(255, 42, 133, 0.35);
+            border-color: rgba(255, 42, 133, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px -10px rgba(255, 42, 133, 0.4);
         }
 
-        /* NAVIGATION TABS ACTIVE STYLE */
-        .nav-tab-active {
-            background: linear-gradient(135deg, #ff2a85 0%, #a855f7 100%) !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 25px rgba(255, 42, 133, 0.5) !important;
-            border-color: rgba(255, 255, 255, 0.4) !important;
+        /* POLAROID FRAME EFFECT */
+        .polaroid-frame {
+            background: #ffffff;
+            color: #1e293b;
+            padding: 10px 10px 24px 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
         }
-
-        /* FLOATING PARTICLES */
-        .particle-heart {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            animation: floatUp 10s linear infinite;
+        .polaroid-frame:hover {
+            transform: rotate(0deg) scale(1.03);
         }
-
-        @keyframes floatUp {
-            0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.7; }
-            80% { opacity: 0.7; }
-            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
-        }
-
-        /* WAX SEAL ENVELOPE EFFECT */
-        .wax-seal {
-            background: radial-gradient(circle at 30% 30%, #ff5277, #990022);
-            box-shadow: 0 4px 15px rgba(255, 42, 133, 0.5), inset 0 -2px 5px rgba(0,0,0,0.4);
-        }
-
-        /* STAMP TICKET COUPON DASHD BORDER */
-        .ticket-cut-left, .ticket-cut-right {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 20px;
-            height: 20px;
-            background-color: #070510;
-            border-radius: 50%;
-            transform: translateY(-50%);
-        }
-        .ticket-cut-left { left: -10px; }
-        .ticket-cut-right { right: -10px; }
 
         /* MODAL ANIMATION */
         .modal-enter {
-            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.92) translateY(10px); }
+            from { opacity: 0; transform: scale(0.92) translateY(12px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* TIMELINE SCROLL PROGRESS BAR */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff2a85, #a855f7, #ffd166);
+            z-index: 50;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
     </style>
 </head>
-<body class="relative pb-20 selection:bg-pink-500 selection:text-white">
+<body class="relative pb-24 text-slate-100 selection:bg-pink-500 selection:text-white">
 
-    <!-- FLOATING AMBIENT PARTICLES CONTAINER -->
-    <div id="particle-container" class="fixed inset-0 pointer-events-none z-0"></div>
+    <!-- TOP SCROLL PROGRESS INDICATOR -->
+    <div id="scroll-progress"></div>
 
-    <!-- MAIN HEADER / HERO SECTION -->
-    <header class="relative z-10 pt-10 pb-6 px-4 text-center max-w-5xl mx-auto">
+    <!-- STAR GALAXY CANVAS BACKGROUND -->
+    <canvas id="galaxy-canvas"></canvas>
+
+    <!-- FLOATING MUSIC PLAYER BAR -->
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 max-w-md w-[92vw] glass-panel rounded-2xl p-3 border border-pink-500/30 shadow-[0_0_30px_rgba(255,42,133,0.3)] flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 overflow-hidden">
+            <div id="music-vinyl" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white shrink-0 shadow-lg animate-spin-slow">
+                <i class="fa-solid fa-compact-disc text-xl"></i>
+            </div>
+            <div class="truncate">
+                <h4 id="audio-title" class="text-xs font-bold text-white truncate">Golden Hour (Piano Cover)</h4>
+                <p id="audio-artist" class="text-[10px] text-pink-300/80 truncate">Ambiente Romántico Lofi</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+            <button onclick="toggleAudio()" id="audio-play-btn" class="w-9 h-9 rounded-full bg-pink-600 hover:bg-pink-500 text-white flex items-center justify-center text-sm shadow-md transition-all active:scale-95">
+                <i id="audio-icon" class="fa-solid fa-pause"></i>
+            </button>
+            <button onclick="nextAudioTrack()" class="w-8 h-8 rounded-full bg-purple-900/60 hover:bg-purple-800 text-purple-200 flex items-center justify-center text-xs transition-colors">
+                <i class="fa-solid fa-forward-step"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER SECTION -->
+    <header class="relative z-10 pt-12 pb-8 px-4 text-center max-w-4xl mx-auto">
         
-        <!-- TOP BADGE -->
-        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel border border-pink-500/40 text-rose-300 text-xs font-bold tracking-widest uppercase mb-4 animate-float">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-pink-500/40 text-pink-300 text-xs font-bold uppercase tracking-widest mb-4 animate-float">
             <i class="fa-solid fa-sparkles text-amber-300"></i>
-            <span>Para la persona que ilumina mi universo</span>
+            <span>Nuestra Historia de Amor</span>
             <i class="fa-solid fa-heart text-pink-500"></i>
         </div>
 
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-purple-300 tracking-tight font-serif mb-3 leading-tight">
-            Para la mejor novia del universo ✨
+        <h1 class="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-purple-300 font-serif tracking-tight mb-3">
+            Para la Mejor Novia del Universo ✨
         </h1>
-        
-        <p class="text-xs md:text-base text-purple-200/80 max-w-2xl mx-auto font-light leading-relaxed mb-8">
-            Bienvenida a tu rincón secreto en el cosmos. Un espacio diseñado especialmente para ti, repleto de nuestras cartas, memorias, promesas y detalles eternos.
+
+        <p class="text-xs sm:text-sm text-purple-200/80 max-w-xl mx-auto leading-relaxed">
+            Un espacio creado para medir cada milisegundo de nuestro amor y revivir cada capítulo imborrable que hemos escrito juntos.
         </p>
-
-        <!-- LIVE ANNIVERSARY REAL-TIME TIMER CLOCK -->
-        <div class="glass-panel max-w-3xl mx-auto rounded-3xl p-6 border border-pink-500/30 shadow-[0_0_50px_rgba(255,42,133,0.15)] relative overflow-hidden mb-8">
-            <div class="absolute -top-10 -left-10 w-32 h-32 bg-pink-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
-
-            <div class="flex items-center justify-center gap-2 mb-4">
-                <i class="fa-solid fa-clock text-amber-300 text-sm"></i>
-                <span class="text-xs uppercase font-extrabold tracking-widest text-amber-300">Tiempo Juntos Escribiendo Esta Historia</span>
-            </div>
-
-            <div class="grid grid-cols-4 gap-3 md:gap-6">
-                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-pink-500/20">
-                    <span id="counter-days" class="block text-2xl md:text-4xl font-black text-pink-400 font-mono">00</span>
-                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Días</span>
-                </div>
-                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-purple-500/20">
-                    <span id="counter-hours" class="block text-2xl md:text-4xl font-black text-purple-300 font-mono">00</span>
-                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Horas</span>
-                </div>
-                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-amber-500/20">
-                    <span id="counter-minutes" class="block text-2xl md:text-4xl font-black text-amber-300 font-mono">00</span>
-                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Minutos</span>
-                </div>
-                <div class="bg-purple-950/40 p-3 md:p-4 rounded-2xl border border-rose-400/20">
-                    <span id="counter-seconds" class="block text-2xl md:text-4xl font-black text-rose-400 font-mono animate-pulse">00</span>
-                    <span class="text-[10px] md:text-xs font-bold uppercase text-purple-300/80 tracking-wider">Segundos</span>
-                </div>
-            </div>
-
-            <p class="text-xs text-purple-200/60 mt-4 italic font-serif">
-                Oficialmente juntos desde el <strong class="text-pink-300 font-sans">26 de Septiembre de 2026</strong> ❤️
-            </p>
-        </div>
-
-        <!-- ROTATING INSTANT LOVE NOTE BUTTON -->
-        <div class="max-w-xl mx-auto">
-            <button onclick="rotateLoveQuote()" class="group relative inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 text-white font-bold text-xs md:text-sm tracking-wide shadow-[0_0_30px_rgba(255,42,133,0.4)] hover:shadow-[0_0_40px_rgba(255,42,133,0.7)] hover:scale-105 active:scale-95 transition-all duration-300">
-                <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-base group-hover:rotate-12 transition-transform"></i>
-                <span>Generar Nota de Amor Instantánea</span>
-                <i class="fa-solid fa-heart text-pink-200"></i>
-            </button>
-
-            <!-- LOVE NOTE DISPLAY BANNER -->
-            <div id="love-note-box" class="mt-4 glass-panel p-4 rounded-2xl border border-pink-500/30 hidden animate-fadeIn">
-                <p id="love-note-text" class="font-serif italic text-sm md:text-base text-pink-100 leading-relaxed">
-                    "Cargando mensajito especial..."
-                </p>
-            </div>
-        </div>
 
     </header>
 
-    <!-- MAIN NAVIGATION BAR (STICKY) -->
-    <nav class="sticky top-4 z-40 max-w-5xl mx-auto px-4 my-8">
-        <div class="glass-panel p-2 rounded-2xl border border-purple-500/30 flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar shadow-2xl">
-            
-            <button onclick="switchTab('tab-letters', this)" class="nav-tab-btn nav-tab-active flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-envelope-open-text text-pink-300"></i>
-                <span>Cartas & Poemas</span>
-            </button>
-
-            <button onclick="switchTab('tab-history', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-timeline text-amber-300"></i>
-                <span>Nuestra Historia</span>
-            </button>
-
-            <button onclick="switchTab('tab-coupons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-ticket text-rose-400"></i>
-                <span>Vales & Promesas</span>
-            </button>
-
-            <button onclick="switchTab('tab-music', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-music text-purple-300"></i>
-                <span>Playlist Vibe</span>
-            </button>
-
-            <button onclick="switchTab('tab-reasons', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-star text-goldWarm"></i>
-                <span>Constelación</span>
-            </button>
-
-            <button onclick="switchTab('tab-surprises', this)" class="nav-tab-btn flex-1 min-w-[130px] py-3 px-3 rounded-xl text-xs md:text-sm font-bold text-purple-200 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 border border-transparent">
-                <i class="fa-solid fa-box-open text-cyanNeon"></i>
-                <span>Caja Sorpresa</span>
-            </button>
-
-        </div>
-    </nav>
-
-    <!-- CONTENT VIEWPORTS CONTAINER -->
-    <main class="relative z-10 max-w-5xl mx-auto px-4">
+    <!-- MAIN CONTAINER -->
+    <main class="relative z-10 max-w-4xl mx-auto px-4 space-y-12">
 
         <!-- ============================================================ -->
-        <!-- TAB 1: CARTAS & POEMAS SECRETOS (VAULT ROOM) -->
+        <!-- 1. REAL-TIME HIGH-PRECISION ANNIVERSARY COUNTER -->
         <!-- ============================================================ -->
-        <section id="tab-letters" class="tab-view block space-y-6">
-            <div class="text-center max-w-lg mx-auto mb-8">
-                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-950/60 px-3 py-1 rounded-full border border-pink-500/30 inline-block mb-2">Bóveda del Corazón</span>
-                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Cartas & Poemas Escritos Para Ti</h2>
-                <p class="text-xs text-purple-200/70 mt-1">Haz clic sobre cualquiera de los sobres lacrados para romper el sello y leer la carta completa.</p>
+        <section class="glass-panel rounded-3xl p-6 sm:p-8 border border-pink-500/40 shadow-[0_0_50px_rgba(255,42,133,0.2)] relative overflow-hidden">
+            <div class="absolute -top-16 -left-16 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -right-16 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="text-center mb-6">
+                <div class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-amber-300 mb-1">
+                    <i class="fa-solid fa-stopwatch"></i>
+                    <span>Tiempo Transcurrido Juntos</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold font-serif text-white">Contador Oficial de Aniversario</h2>
+                <p class="text-xs text-purple-200/60 mt-1">Desde el <strong class="text-pink-300">26 de Septiembre de 2026</strong> a las 00:00:00</p>
             </div>
 
-            <!-- ENVELOPES GRID -->
-            <div id="letters-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dynamically populated via JavaScript -->
+            <!-- MAIN COUNTER GRID (WITH MILLISECONDS) -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mb-6">
+                <div class="bg-purple-950/50 p-4 rounded-2xl border border-pink-500/30 text-center">
+                    <span id="cnt-days" class="block text-3xl sm:text-4xl font-black text-pink-400 font-mono">00</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300">Días</span>
+                </div>
+                <div class="bg-purple-950/50 p-4 rounded-2xl border border-purple-500/30 text-center">
+                    <span id="cnt-hours" class="block text-3xl sm:text-4xl font-black text-purple-300 font-mono">00</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300">Horas</span>
+                </div>
+                <div class="bg-purple-950/50 p-4 rounded-2xl border border-amber-500/30 text-center">
+                    <span id="cnt-minutes" class="block text-3xl sm:text-4xl font-black text-amber-300 font-mono">00</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300">Minutos</span>
+                </div>
+                <div class="bg-purple-950/50 p-4 rounded-2xl border border-rose-400/30 text-center">
+                    <span id="cnt-seconds" class="block text-3xl sm:text-4xl font-black text-rose-400 font-mono animate-pulse">00</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300">Segundos</span>
+                </div>
+                <div class="col-span-2 sm:col-span-1 bg-purple-950/50 p-4 rounded-2xl border border-cyanNeon/30 text-center">
+                    <span id="cnt-ms" class="block text-3xl sm:text-4xl font-black text-cyanNeon font-mono">000</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300">Milisegundos</span>
+                </div>
             </div>
+
+            <!-- EXTENDED TOTAL TOTALS DROPDOWN TOGGLE -->
+            <div class="text-center">
+                <button onclick="toggleExtendedStats()" class="text-xs font-bold text-pink-300 hover:text-pink-200 inline-flex items-center gap-2 bg-pink-950/60 px-4 py-2 rounded-xl border border-pink-500/30 transition-all">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span id="ext-stats-btn-text">Ver Desglose Total Acumulado</span>
+                    <i id="ext-stats-icon" class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                </button>
+
+                <div id="extended-stats-box" class="hidden mt-4 pt-4 border-t border-purple-500/20 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-purple-900/30 p-3 rounded-xl border border-purple-500/20 text-center">
+                        <span class="text-[10px] uppercase font-bold text-purple-300/80 block">Total Horas Juntos</span>
+                        <span id="total-hours" class="text-lg font-mono font-bold text-pink-300">0</span>
+                    </div>
+                    <div class="bg-purple-900/30 p-3 rounded-xl border border-purple-500/20 text-center">
+                        <span class="text-[10px] uppercase font-bold text-purple-300/80 block">Total Minutos Juntos</span>
+                        <span id="total-minutes" class="text-lg font-mono font-bold text-amber-300">0</span>
+                    </div>
+                    <div class="bg-purple-900/30 p-3 rounded-xl border border-purple-500/20 text-center">
+                        <span class="text-[10px] uppercase font-bold text-purple-300/80 block">Total Segundos Juntos</span>
+                        <span id="total-seconds" class="text-lg font-mono font-bold text-rose-300">0</span>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- ============================================================ -->
-        <!-- TAB 2: NUESTRA HISTORIA (INTERACTIVE TIMELINE & MEMORIES) -->
+        <!-- 2. DEEP INTERACTIVE TIMELINE ("NUESTRA HISTORIA") -->
         <!-- ============================================================ -->
-        <section id="tab-history" class="tab-view hidden space-y-8">
-            <div class="text-center max-w-lg mx-auto mb-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">Línea del Tiempo Interactiva</span>
-                <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Nuestra Historia Capítulo a Capítulo</h2>
-                <p class="text-xs text-purple-200/70 mt-1">Filtra nuestros recuerdos o agrega tus propios deseos para el futuro.</p>
+        <section class="space-y-6">
+            
+            <div class="text-center max-w-lg mx-auto">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30 inline-block mb-2">
+                    Línea del Tiempo Interactiva
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-bold font-serif text-white">Nuestra Historia Capítulo a Capítulo</h2>
+                <p class="text-xs text-purple-200/70 mt-1">Explora nuestros momentos inolvidables. Haz clic en cada hito para abrir el álbum completo.</p>
             </div>
 
-            <!-- TIMELINE CATEGORY FILTERS -->
-            <div class="flex items-center justify-center gap-2 flex-wrap mb-6">
-                <button onclick="filterTimeline('all', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-pink-600 text-white shadow-md border border-pink-400">Todos</button>
-                <button onclick="filterTimeline('inicios', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">El Comienzo</button>
-                <button onclick="filterTimeline('especiales', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Momentos Clave</button>
-                <button onclick="filterTimeline('risas', this)" class="timeline-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Aventuras & Risas</button>
+            <!-- SEARCH BAR & CATEGORY FILTERS -->
+            <div class="glass-panel p-4 rounded-2xl border border-purple-500/30 space-y-3">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-purple-400/60 text-xs"></i>
+                    <input type="text" id="timeline-search" oninput="handleTimelineSearch()" placeholder="Buscar en nuestra historia (ej: cita, risas, mensaje, viaje)..." class="w-full bg-purple-950/60 border border-purple-500/30 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-pink-500 transition-colors">
+                </div>
+
+                <div class="flex items-center justify-center gap-2 flex-wrap">
+                    <button onclick="filterTimelineCategory('all', this)" class="timeline-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-pink-600 text-white shadow-md border border-pink-400">Todos</button>
+                    <button onclick="filterTimelineCategory('inicios', this)" class="timeline-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Primeros Momentos</button>
+                    <button onclick="filterTimelineCategory('citas', this)" class="timeline-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Citas Especiales</button>
+                    <button onclick="filterTimelineCategory('aventuras', this)" class="timeline-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Aventuras</button>
+                    <button onclick="filterTimelineCategory('promesas', this)" class="timeline-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-purple-950/60 text-purple-200 border border-purple-500/30 hover:bg-purple-900/50">Promesas</button>
+                </div>
             </div>
 
-            <!-- TIMELINE CONTAINER -->
-            <div class="relative border-l-2 border-pink-500/30 ml-4 md:ml-32 space-y-8 pb-4" id="timeline-container">
+            <!-- VERTICAL TIMELINE CONTAINER -->
+            <div class="relative border-l-2 border-pink-500/30 ml-4 sm:ml-28 space-y-8 py-4" id="timeline-node-container">
                 <!-- Dynamically populated via JavaScript -->
             </div>
 
-            <!-- ADD NEW FUTURE WISH / CHAPTER FORM -->
-            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-amber-500/30 max-w-2xl mx-auto mt-12">
+            <!-- ADD CUSTOM MEMORY CAPTION FORM -->
+            <div class="glass-panel rounded-3xl p-6 border border-amber-500/30 max-w-xl mx-auto">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 text-lg">
-                        <i class="fa-solid fa-pen-nib"></i>
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 text-base">
+                        <i class="fa-solid fa-plus"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white font-serif">Agregar Nuestro Próximo Capítulo</h3>
-                        <p class="text-xs text-purple-200/70">¿Qué sueño o momento deseas que vivamos juntos pronto?</p>
+                        <h3 class="text-base font-bold text-white font-serif">Agregar Un Nuevo Recuerdo</h3>
+                        <p class="text-xs text-purple-200/70">Añade otro hito especial a nuestra línea del tiempo eterna.</p>
                     </div>
                 </div>
 
-                <form onsubmit="handleAddWish(event)" class="space-y-4">
+                <form onsubmit="handleNewMemory(event)" class="space-y-3">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300 mb-1">Título del Deseo</label>
-                        <input type="text" id="wish-title" required placeholder="Ej: Viaje a la playa juntos, Noche de picnic..." class="w-full bg-purple-950/50 border border-purple-500/30 rounded-xl px-4 py-2.5 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-pink-500 transition-colors">
+                        <input type="text" id="memory-title" required placeholder="Título del recuerdo (ej: Noche de estrellas...)" class="w-full bg-purple-950/50 border border-purple-500/30 rounded-xl px-3.5 py-2 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-pink-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-purple-300 mb-1">Detalles o Promesa</label>
-                        <textarea id="wish-desc" required rows="3" placeholder="Escribe aquí por qué quieres que hagamos esto..." class="w-full bg-purple-950/50 border border-purple-500/30 rounded-xl px-4 py-2.5 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-pink-500 transition-colors"></textarea>
+                        <textarea id="memory-desc" required rows="2" placeholder="Cuéntame qué pasó y por qué fue mágico..." class="w-full bg-purple-950/50 border border-purple-500/30 rounded-xl px-3.5 py-2 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-pink-500"></textarea>
                     </div>
-                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-pink-600 font-bold text-slate-950 text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-plus-circle"></i> Guardar Capítulo en Nuestra Lista
+                    <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-pink-600 font-bold text-slate-950 text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-md">
+                        <i class="fa-solid fa-bookmark mr-1"></i> Guardar Recuerdo en Nuestra Historia
                     </button>
                 </form>
             </div>
+
         </section>
 
-        <!-- ============================================================ -->
-        <!-- TAB 3: VALES & PROMESAS (INTERACTIVE REDEEMABLE VOUCHERS) -->
-        <!-- ============================================================ -->
-        <section id="tab-coupons" class="tab-view hidden space-y-6">
-            <div class="text-center max-w-lg mx-auto mb-8">
-                <span class="text-xs font-bold uppercase tracking-widest text-rose-400 bg-rose-950/60 px-3 py-1 ro
+    </main>
+
+    <!-- GLOBAL HIGH-QUALITY MODAL FOR TIMELINE NODES -->
+    <div id="timeline-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
+        <div class="glass-panel w-full max-w-2xl rounded-3xl p-6 sm:p-8 border border-pink-500/40 shadow-2xl relative modal-enter max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-purple-900/60 hover:bg-pink-600 text-white flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body-content"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        // ============================================================
+        // 1. TIMELINE DATA STRUCTURE
+        // ============================================================
+        const timelineDatabase = [
+            {
+                id: 1,
+                category: "inicios",
+                icon: "fa-comments",
+                dateLabel: "El Inicio",
+                title: "Nuestra Primera Conversación",
+                quote: "Sin saberlo, esa noche comenzó la mejor historia de mi vida.",
+                shortDesc: "Aquel intercambio de mensajes sencillo que rápidamente se transformó en horas platicando sin querer parar.",
+                fullStory: "Aquel primer día en que empezamos a hablar jamás sospeché todo lo que vendría después. Lo que comenzó como un saludo casual se convirtió en una charla fluida, llena de risas y de coincidencias bonitas. Desde esa primera noche sentí una conexión única y especial contigo
